@@ -26,11 +26,11 @@ const Posts = () => {
     dispatch(fetchPosts());
   }, []);
 
-  const deletePost = async (id) => {
+  const deletePost = async (id: string) => {
     try {
       await dispatch(fetchRemovePost(id)).unwrap();
       successToast("Post is deleted");
-    } catch (err) {
+    } catch (err: any) {
       console.log(">>>>>>>>>>>>>>>>", err);
       errorToast(err.data);
     }
@@ -58,7 +58,7 @@ const Posts = () => {
                 key={obj.id}
                 post={obj}
                 userData={userData}
-                handleClick={() => deletePost(obj.id)}
+                handleClick={() => deletePost(obj.id.toString())}
               />
             ))}
             <div className="post-button-area">

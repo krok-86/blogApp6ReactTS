@@ -10,10 +10,11 @@ import { fetchAuthMe } from "./redux/slices/auth";
 import { useEffect } from "react";
 import PrivateRoute from "./utils/router/PrivateRouter";
 import { useAppDispatch } from "./hook";
+import './App.css';
 
 function App(){
     const dispatch = useAppDispatch();
-    const navigate = useNavigate()   
+    const navigate = useNavigate();
     useEffect(() => {
         dispatch(fetchAuthMe())
         navigate(JSON.parse(window.sessionStorage.getItem('lastRoute') || '{}'))

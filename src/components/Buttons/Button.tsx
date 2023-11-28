@@ -5,6 +5,8 @@ interface IButton {
   name?: string,
   className?: string,
   handleClick?: () => void,
+  disabled?: boolean,
+  type?: string
 }
 
 const Button: FC<IButton> = ({name, handleClick, className}) => {

@@ -7,29 +7,31 @@ import { successToast, errorToast } from "../Utilities/toasts";
 import { format } from "date-fns";
 import { enGB } from "date-fns/locale";
 import { getPostById } from "../../api/postApi";
-import { useDispatch } from "react-redux";
 import { sendUpdatedPost } from "../../redux/slices/posts";
+import { useAppDispatch } from "../../hook";
+import {Post} from '../../types';
 
 const PostEdit = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
-  const [postData, setPostData] = useState({});
+  const [postData, setPostData] = useState({} as Post);
 
   useEffect(() => {
     const fetchDataId = async () => {
+      if (!id) return;
       try {
         const result = await getPostById(id);
         setPostData(result.data);
-      } catch (err) {
+      } catch (err: any) {
         errorToast(err.response.data.message);
         console.log(">>>>>>", err);
       }
     };
-    fetchDataId(id);
+    fetchDataId();
   }, []);
 
-  const updatePost = (event) => {
+  const updatePost = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     try {
       const newPost = { ...postData, post: event.target?.value };
       setPostData(newPost);
@@ -39,11 +41,12 @@ const PostEdit = () => {
   };
 
   const sendPost = async () => {
+    if (!id ) return;
     try {
-      await dispatch(sendUpdatedPost({id, postText: postData.post})).unwrap();
+      await dispatch(sendUpdatedPost({id, postText: postData.post || ''})).unwrap();
       successToast("The post has been edited");
       navigate("/");
-    } catch (err) {
+    } catch (err: any) {
       errorToast(err.data);
     }
   };
@@ -60,11 +63,10 @@ const PostEdit = () => {
           <div className="post-title">Post content:</div>
           <textarea
             className="post-input"
-            type="text"
             value={postData.post}
             onChange={updatePost}
             placeholder="Add new post"
-            rows="1"
+            rows={1}
           >
             {postData.post}
           </textarea>
