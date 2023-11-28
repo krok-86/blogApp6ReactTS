@@ -4,16 +4,16 @@ import { Link } from "react-router-dom";
 import Button from "../Buttons/Button";
 import { successToast, errorToast } from "../Utilities/toasts";
 import PostItem from "../PostItem/PostItem";
-import { useDispatch, useSelector } from "react-redux";
 import { fetchPosts, fetchRemovePost } from "../../redux/slices/posts";
 import { logout, selectIsAuth } from "../../redux/slices/auth";
+import { useAppDispatch, useAppSelector } from "../../hook";
 
 const Posts = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const { posts } = useSelector((state) => state.posts);
-  const userData = useSelector((state) => state.auth.data);
-  const isAuth = useSelector(selectIsAuth);
+  const { posts } = useAppSelector((state) => state.posts);
+  const userData = useAppSelector((state) => state.auth.data);
+  const isAuth = useAppSelector(selectIsAuth);
 
   const onClickLogOut = () => {
     if (window.confirm("Do you really want to go out?")) {

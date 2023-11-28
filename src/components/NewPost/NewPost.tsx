@@ -1,20 +1,24 @@
 import { useForm } from "react-hook-form";
 import NewPostStyled from "./NewPostStyled";
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import Select from "react-select";
 import { useNavigate } from "react-router-dom";
 import Button from "../Buttons/Button";
 import { successToast, errorToast } from "../Utilities/toasts";
 import { getTopics } from "../../api/postApi";
-import { useDispatch, useSelector } from "react-redux";
 import { addPost } from "../../redux/slices/posts";
+import { useAppDispatch, useAppSelector } from "../../hook";
+
+interface NewPost {
+
+}
 
 const NewPost = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [topics, setTopics] = useState([]);
-  const userData = useSelector((state) => state.auth.data);
-  console.log(userData?.userData?.name);
+  const userData = useAppSelector((state) => state.auth.data);
+  console.log(userData);
 
   const [topicData, setTopicData] = useState(null);
 
@@ -31,10 +35,18 @@ const NewPost = () => {
     }
   }, []);
 
-  const topicTitle = topics.map((item) => ({
+interface ITopicTitle {
+  [label: string]: string; 
+  [value: number]: string;//fix?
+}
+  const topicTitle = topics.map((item:ITopicTitle) => ({
     label: item.title,
     value: item.id,
   }));
+
+console.log(topics)
+
+
 
   const submitPosts = async (value) => {
     try {
@@ -48,6 +60,7 @@ const NewPost = () => {
   };
 
   const handleSelectTopic = (theme) => {
+    console.log(typeof(theme))
     setTopicData(theme);
   };
 

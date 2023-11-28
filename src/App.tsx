@@ -1,18 +1,18 @@
-import "./App.css";
+import "./App.tsx";
 import Posts from "./components/Posts/Posts";
 import PostEdit from "./components/PostEdit/PostEdit";
 import NewPost from "./components/NewPost/NewPost";
 import NewUser from "./components/NewUser/NewUser";
-import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useDispatch } from "react-redux";
 import { fetchAuthMe } from "./redux/slices/auth";
 import { useEffect } from "react";
 import PrivateRoute from "./utils/router/PrivateRouter";
+import { useAppDispatch } from "./hook";
 
 function App(){
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const navigate = useNavigate()   
     useEffect(() => {
         dispatch(fetchAuthMe())

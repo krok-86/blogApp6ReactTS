@@ -3,8 +3,21 @@ import { format } from "date-fns";
 import { enGB } from "date-fns/esm/locale";
 import Button from "../Buttons/Button";
 import { Link } from "react-router-dom";
+import { FC } from "react";
 
-const PostItem = ({ post, handleClick }) => {
+interface IPostItem {
+  post:  
+  {
+    id: number,
+    postText: string,
+    userId: number,    
+    createdAt: string,
+    [user: string] : string
+  }[];
+  handleClick?: () => void;
+}
+
+const PostItem: FC <IPostItem> = ({ post, handleClick }) => {
   const date = format(new Date(post.createdAt), "MMM d, yyyy", {
     locale: enGB,
   });

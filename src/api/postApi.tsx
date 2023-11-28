@@ -8,11 +8,11 @@ const userAuthMeUrl = '/users/authorization/me';
 
 //post block
 
-export const getPostById = async (id) => {
+export const getPostById = async (id: number) => {
     return await axiosInstance.get(`${postUrl}/${id}`)//why {params: id}?
 }
 
-export const putPostById = (params) => {
+export const putPostById = (params: {id: number; postText: string}) => {
     return axiosInstance.put(`${postUrl}/${params.id}`, {postText: params.postText});//?
 }
 
@@ -20,11 +20,11 @@ export const getPosts = () => {
     return axiosInstance.get(postUrl);
 }
 
-export const deletePostById = (id) => {
+export const deletePostById = (id: number) => {
     return axiosInstance.delete(`${postUrl}/${id}`)//?
 }
 
-export const postPosts = (body) => {
+export const postPosts = (body: string) => {
     return axiosInstance.post(postUrl, body)
 }
 
@@ -34,11 +34,11 @@ export const postPosts = (body) => {
 //     return axiosInstance.get(userUrl);
 // }
 
-export const postUserReg = (body) => {
+export const postUserReg = (body: string) => {
     return axiosInstance.post(userRegUrl,body);
 }
 
-export const postUserAuth = (body) => {
+export const postUserAuth = (body: string) => {
     return axiosInstance.post(userAuthUrl,body);
 }
 

@@ -1,6 +1,13 @@
 import ButtonStyled from "./ButtonStyled";
+import { FC } from "react";
 
-const Button = ({name, handleClick, className}) => {
+interface IButton {
+  name?: string,
+  className?: string,
+  handleClick?: () => void,
+}
+
+const Button: FC<IButton> = ({name, handleClick, className}) => {
   return (
     <ButtonStyled
     onClick={handleClick}

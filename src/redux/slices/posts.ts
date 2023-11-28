@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   deletePostById,
   getPosts,
@@ -6,12 +6,25 @@ import {
   putPostById,
 } from "../../api/postApi";
 
-export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
+type Posts = {
+  id: number,
+  postText: string,
+  userId: number,
+  err: string,//fix
+}[];
+
+type PostsState = {
+  posts: Posts[];
+  status: string;
+  error?: string | null;  
+};
+
+export const fetchPosts = createAsyncThunk<Posts[]>("posts/fetchPosts", async () => {
   const { data } = await getPosts();
-  return data;
+  return data as Posts;//fix
 });
 
-export const fetchRemovePost = createAsyncThunk(
+export const fetchRemovePost = createAsyncThunk<Posts, number, {rejectValue: string} >(
   "posts/fetchRemovePost",
   async (id, { rejectWithValue }) => {
     try {
@@ -22,7 +35,7 @@ export const fetchRemovePost = createAsyncThunk(
   }
 );
 
-export const addPost = createAsyncThunk(
+export const addPost = createAsyncThunk<Posts[]>(
   "posts/addPost",
   async (data, { rejectWithValue }) => {
     try {
@@ -33,7 +46,7 @@ export const addPost = createAsyncThunk(
   }
 );
 
-export const sendUpdatedPost = createAsyncThunk(
+export const sendUpdatedPost = createAsyncThunk<Posts[]>(
   "posts/updatePost",
   async (params, { rejectWithValue }) => {
     try {
@@ -44,7 +57,7 @@ export const sendUpdatedPost = createAsyncThunk(
   }
 );
 
-const initialState = {
+const initialState: PostsState = {
   posts: [],
   status: "loading",  
 };
@@ -55,11 +68,11 @@ const postsSlice = createSlice({
   reducers: {},
   extraReducers: {
     //get posts
-    [fetchPosts.pending]: (state) => {
+    [fetchPosts.pending]: (state: { posts: PostsState; status: string; }) => {
       state.posts = [];
       state.status = "loading";
     },
-    [fetchPosts.fulfilled]: (state, action) => {
+    [fetchPosts.fulfilled]: (state, action: PayloadAction<Posts>) => {
       state.posts = action.payload;
       state.status = "loaded";
     },
@@ -68,18 +81,18 @@ const postsSlice = createSlice({
       state.status = "error";
     },
     //remove post
-    [fetchRemovePost.fulfilled]: (state, action) => {
+    [fetchRemovePost.fulfilled]: (state, action: PayloadAction<Posts>) => {
       state.posts = state.posts.filter(
         (obj) => obj.id !== action.payload.data.id
       );
     },
     //add post
-    [addPost.fulfilled]: (state, action) => {
+    [addPost.fulfilled]: (state, action: PayloadAction<Posts>) => {
       state.posts = [...state.posts, action.payload.data];
       console.log(state.posts);
     },
     //update post
-    [sendUpdatedPost.fulfilled]: (state, action) => {
+    [sendUpdatedPost.fulfilled]: (state, action: PayloadAction<Posts>) => {
       state.posts = state.posts.map((item) => {
         if (item.id === action.payload.data.id) {
           return action.payload.data;

@@ -5,13 +5,18 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import unknown from "../../img/Unknown_person.jpg";
 import { successToast, errorToast } from "../Utilities/toasts";
-import { useDispatch } from "react-redux";
 import { fetchAuth, fetchReg } from "../../redux/slices/auth";
+import { FC } from "react";
+import { useAppDispatch } from "../../hook";
 
-const NewUser = ({ isRegistration }) => {
+interface INewUser {
+  isRegistration: boolean,
+}
+
+const NewUser: FC <INewUser> = ({ isRegistration }) => {
   const navigate = useNavigate();
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const {
     register,
