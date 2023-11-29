@@ -51,18 +51,20 @@ const NewUserStyled = styled.div`
    min-width: 30%;
   } 
   .user-img {
-    width: 100%;
-    /* margin-top: 3px; */
-    border-radius: 20px;
+    width: 40%;
+    aspect-ratio: 3/2;
+    object-fit: contain; 
+    mix-blend-mode: color-burn;    
+    /* width: 100%;    
+    border-radius: 20px; */
   }     
-  .user-avatar-wrap {
+  /* .user-avatar-wrap {
     display: flex;
     justify-content: enter;
     align-items: center;
     max-width: 200px;
     margin-bottom: 20px;
-    /* border: 1px solid red; */
-  }
+  } */
   .error {
     border: 1px solid red;
   }
@@ -70,5 +72,20 @@ const NewUserStyled = styled.div`
     display: flex;
     flex-flow: row nowrap;
   }
+  .post-button-area {
+    width: 40px;
+    text-decoration: none;
+    border-radius: 50%;
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #779fc4;
+    color: wheat;
+    :hover {
+    background-color: #ddd;
+    color: black;
+}
+
+  }
+  
 `
 export default NewUserStyled;

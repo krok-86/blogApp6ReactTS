@@ -8,6 +8,7 @@ import { successToast, errorToast } from "../Utilities/toasts";
 import { fetchAuth, fetchReg } from "../../redux/slices/auth";
 import { FC } from "react";
 import { useAppDispatch } from "../../hook";
+import { IRegistrationForm } from "../../types";
 
 interface INewUser {
   isRegistration: boolean,
@@ -33,35 +34,34 @@ const NewUser: FC <INewUser> = ({ isRegistration }) => {
     mode: "onChange",
   });
 
-  const submitForm = async (value) => {
+  const submitForm = async (value: IRegistrationForm) => {
     try {
       if (isRegistration) {
         const data = await dispatch(fetchReg(value)).unwrap();
-        if ("token" in data) {
+        if ("token" in data && data.token) {
           window.localStorage.setItem("token", data.token);
         }
         successToast("User is created");
         navigate("/");
       } else {
         const data = await dispatch(fetchAuth(value)).unwrap();
-        if ("token" in data) {
+        if ("token" in data && data.token) {
           window.localStorage.setItem("token", data.token);
           successToast("User is authorized");
           navigate("/");
         } else {
-          errorToast(data.payload.data);
+          errorToast(data?.payload?.data || "");
         }
       }
       navigate("/");
-    } catch (err) {
+    } catch (err: any) {
       errorToast(err.data);
     }
   };
   const resetForm = () => {
     reset();
   };
-const goBack = () => {
-  console.log(">>>>>>>>>","click")
+const goBack = () => {  
   navigate(-1);
 };
   const title = isRegistration ? "Registration" : "Authorization";
@@ -69,6 +69,7 @@ const goBack = () => {
   return (
     <NewUserStyled>
       <div className="user-value">
+        <Button className="post-button-area" name="<" handleClick = {goBack} />
         <div className="user-text">{title}</div>
         <div className="user-img-wrap">
           <form onSubmit={handleSubmit(submitForm)}>
@@ -76,7 +77,7 @@ const goBack = () => {
               <input
                 className={errors.name ? "user-input error" : "user-input"}
                 placeholder="name"
-                label="Name"
+                // label="Name"
                 type="text"
                 {...register("name", { required: "add name" })}
               />
@@ -84,14 +85,14 @@ const goBack = () => {
             <input
               className={errors.email ? "user-input error" : "user-input"}
               placeholder="email"
-              label="E-mail"
+              // label="E-mail"
               type="email"
               {...register("email", { required: "add email" })}
             />
             <input
               className={errors.password ? "user-input error" : "user-input"}
               placeholder="password"
-              label="Password"
+              // label="Password"
               type="password"
               {...register("password", { required: "add password" })}
             ></input>
@@ -110,11 +111,10 @@ const goBack = () => {
               )}
               
             </div>
-          </form>
-          <Button className="user-button" name="go back" handleClick = {goBack} />
-          <div className="user-avatar-wrap">
+          </form>          
+          {/* <div className="user-avatar-wrap"> */}
           <img src={unknown} alt="unknown" className="user-img" />
-          </div>
+          {/* </div> */}
         </div>
       </div>
     </NewUserStyled>

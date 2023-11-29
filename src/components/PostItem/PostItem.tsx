@@ -4,21 +4,16 @@ import { enGB } from "date-fns/esm/locale";
 import Button from "../Buttons/Button";
 import { Link } from "react-router-dom";
 import { FC } from "react";
+import { IRegistrationForm, Post } from "../../types";
 
 interface IPostItem {
-  post:  
-  {
-    id: number,
-    postText: string,
-    userId: number,    
-    createdAt: string,
-    [user: string] : string
-  }[];
+  post: Post,
+  userData: IRegistrationForm | null,
   handleClick?: () => void;
 }
 
 const PostItem: FC <IPostItem> = ({ post, handleClick }) => {
-  const date = format(new Date(post.createdAt), "MMM d, yyyy", {
+  const date = post.createdAt && format(new Date(post.createdAt), "MMM d, yyyy", {
     locale: enGB,
   });
 
@@ -35,7 +30,7 @@ const PostItem: FC <IPostItem> = ({ post, handleClick }) => {
           </div>
           <div className="post-number">
             <div>Created at</div>
-            <div>{date}</div>
+            <div>{date || ""}</div>
           </div>
           <div className="post-number">Author {post?.user?.name}</div>
           <>

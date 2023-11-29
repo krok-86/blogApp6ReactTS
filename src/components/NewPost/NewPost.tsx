@@ -8,22 +8,21 @@ import { successToast, errorToast } from "../Utilities/toasts";
 import { getTopics } from "../../api/postApi";
 import { addPost } from "../../redux/slices/posts";
 import { useAppDispatch, useAppSelector } from "../../hook";
+import { Post, SelectorType } from "../../types";
 
-interface NewPost {
+type TopicDataType = SelectorType | null;
 
-}
-
-const NewPost = () => {
+const NewPost: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [topics, setTopics] = useState([]);
   const userData = useAppSelector((state) => state.auth.data);
   console.log(userData);
 
-  const [topicData, setTopicData] = useState(null);
+  const [topicData, setTopicData] = useState<TopicDataType>(null);
 
   const { register, handleSubmit, reset } = useForm({
-    defaultValues: {},
+    defaultValues: {} as Post,
   });
 
   useEffect(() => {
@@ -35,32 +34,32 @@ const NewPost = () => {
     }
   }, []);
 
-interface ITopicTitle {
-  [label: string]: string; 
-  [value: number]: string;//fix?
-}
-  const topicTitle = topics.map((item:ITopicTitle) => ({
+  interface ITopicTitle {
+    [label: string]: string;
+    [value: number]: string; //fix?
+  }
+  const topicTitle = topics.map((item: ITopicTitle) => ({
     label: item.title,
     value: item.id,
   }));
 
-console.log(topics)
-
-
-
-  const submitPosts = async (value) => {
+  const submitPosts = async (value: Post) => {
     try {
-      const body = { ...value, userId: userData.id, topicId: topicData.value };
+      const body = {
+        ...value,
+        userId: userData?.id,
+        topicId: topicData?.value,
+      };
       dispatch(addPost(body)).unwrap();
       successToast("Post is created");
       navigate("/");
-    } catch (err) {
+    } catch (err: any) {
       errorToast(err.data);
     }
   };
 
-  const handleSelectTopic = (theme) => {
-    console.log(typeof(theme))
+  const handleSelectTopic = (theme: SelectorType | null) => {
+    console.log(typeof theme);
     setTopicData(theme);
   };
 
@@ -74,7 +73,7 @@ console.log(topics)
       try {
         const result = await getTopics();
         setTopics(result.data);
-      } catch (err) {
+      } catch (err: any) {
         errorToast(err.response.data.message);
         console.log(">>>>>>", err);
       }
@@ -90,7 +89,6 @@ console.log(topics)
           <form onSubmit={handleSubmit(submitPosts)}>
             <textarea
               className="post-input"
-              type="text"
               {...register("postText", { required: true })}
               placeholder="Enter your post here..."
             />
@@ -100,7 +98,7 @@ console.log(topics)
               onChange={(value) => handleSelectTopic(value)}
               placeholder="Select topic..."
               value={topicData}
-              required="true"
+              required={true}
             />
             <div className="post-author"> Author: {userData?.name}</div>
             <div className="post-buttons">

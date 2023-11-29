@@ -1,4 +1,7 @@
 import axiosInstance from ".";
+import { IEditPost, IRegistrationForm, IRegistrationFormData, Post } from "../types";
+
+
 
 const postUrl = '/posts';
 const topicUrl = '/topics';
@@ -8,11 +11,11 @@ const userAuthMeUrl = '/users/authorization/me';
 
 //post block
 
-export const getPostById = async (id: number) => {
+export const getPostById = async (id: string) => {
     return await axiosInstance.get(`${postUrl}/${id}`)//why {params: id}?
 }
 
-export const putPostById = (params: {id: number; postText: string}) => {
+export const putPostById = (params: IEditPost) => {
     return axiosInstance.put(`${postUrl}/${params.id}`, {postText: params.postText});//?
 }
 
@@ -20,11 +23,11 @@ export const getPosts = () => {
     return axiosInstance.get(postUrl);
 }
 
-export const deletePostById = (id: number) => {
-    return axiosInstance.delete(`${postUrl}/${id}`)//?
+export const deletePostById = (id: string) => {
+    return axiosInstance.delete<Post>(`${postUrl}/${id}`)//?
 }
 
-export const postPosts = (body: string) => {
+export const postPosts = (body: Post) => {
     return axiosInstance.post(postUrl, body)
 }
 
@@ -34,16 +37,16 @@ export const postPosts = (body: string) => {
 //     return axiosInstance.get(userUrl);
 // }
 
-export const postUserReg = (body: string) => {
-    return axiosInstance.post(userRegUrl,body);
+export const postUserReg = (body: IRegistrationForm) => {
+    return axiosInstance.post<IRegistrationFormData>(userRegUrl,body);
 }
 
-export const postUserAuth = (body: string) => {
-    return axiosInstance.post(userAuthUrl,body);
+export const postUserAuth = (body: IRegistrationForm) => {
+    return axiosInstance.post<IRegistrationFormData>(userAuthUrl,body);
 }
 
 export const getUserAuthMe = () => {
-    return axiosInstance.get(userAuthMeUrl);
+    return axiosInstance.get< IRegistrationForm>(userAuthMeUrl);
 }
 
 // topic block

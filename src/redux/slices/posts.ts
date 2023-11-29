@@ -1,4 +1,5 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { IEditPost, IRejectValue, Post, PostData } from "../../types";
 import {
   deletePostById,
   getPosts,
@@ -6,101 +7,100 @@ import {
   putPostById,
 } from "../../api/postApi";
 
-type Posts = {
-  id: number,
-  postText: string,
-  userId: number,
-  err: string,//fix
-}[];
-
 type PostsState = {
-  posts: Posts[];
-  status: string;
-  error?: string | null;  
+  posts: Post[];
+  status: string | null;
+  error?: string | null;
 };
 
-export const fetchPosts = createAsyncThunk<Posts[]>("posts/fetchPosts", async () => {
-  const { data } = await getPosts();
-  return data as Posts;//fix
+export const fetchPosts = createAsyncThunk<Post[]>(
+  "posts/fetchPosts",
+  async () => {
+    const { data } = await getPosts();
+    return data as Post[];
+  }
+);
+
+export const fetchRemovePost = createAsyncThunk<
+  PostData,
+  string,
+  { rejectValue: IRejectValue }
+>("posts/fetchRemovePost", async (id, { rejectWithValue }) => {
+  try {
+    return await deletePostById(id);
+  } catch (err: any) {
+    //fix
+    return rejectWithValue({ data: err.response.data.message });
+  }
 });
 
-export const fetchRemovePost = createAsyncThunk<Posts, number, {rejectValue: string} >(
-  "posts/fetchRemovePost",
-  async (id, { rejectWithValue }) => {
-    try {
-      return await deletePostById(id);
-    } catch (err) {
-      return rejectWithValue({ data: err.response.data.message });
-    }
+export const addPost = createAsyncThunk<
+  PostData,
+  Post,
+  { rejectValue: IRejectValue }
+>("posts/addPost", async (data, { rejectWithValue }) => {
+  try {
+    return await postPosts(data);
+  } catch (err: any) {
+    return rejectWithValue({ data: err.response.data.message });
   }
-);
+});
 
-export const addPost = createAsyncThunk<Posts[]>(
-  "posts/addPost",
-  async (data, { rejectWithValue }) => {
-    try {
-      return await postPosts(data);
-    } catch (err) {
-      return rejectWithValue({ data: err.response.data.message });
-    }
+export const sendUpdatedPost = createAsyncThunk<
+  PostData,
+  IEditPost,
+  { rejectValue: IRejectValue }
+>("posts/updatePost", async (params, { rejectWithValue }) => {
+  try {
+    return await putPostById(params);
+  } catch (err: any) {
+    return rejectWithValue({ data: err.response.data.message });
   }
-);
-
-export const sendUpdatedPost = createAsyncThunk<Posts[]>(
-  "posts/updatePost",
-  async (params, { rejectWithValue }) => {
-    try {
-      return await putPostById(params);
-    } catch (err) {
-      return rejectWithValue({ data: err.response.data.message });
-    }
-  }
-);
+});
 
 const initialState: PostsState = {
   posts: [],
-  status: "loading",  
+  status: "loading",
 };
 
 const postsSlice = createSlice({
   name: "posts",
   initialState,
   reducers: {},
-  extraReducers: {
+  extraReducers: (builder) => {
     //get posts
-    [fetchPosts.pending]: (state: { posts: PostsState; status: string; }) => {
+    builder.addCase(fetchPosts.pending, (state) => {
       state.posts = [];
       state.status = "loading";
-    },
-    [fetchPosts.fulfilled]: (state, action: PayloadAction<Posts>) => {
+    });
+    builder.addCase(fetchPosts.fulfilled, (state, action) => {
       state.posts = action.payload;
       state.status = "loaded";
-    },
-    [fetchPosts.rejected]: (state) => {
+    });
+    builder.addCase(fetchPosts.rejected, (state) => {
       state.posts = [];
       state.status = "error";
-    },
+    });
     //remove post
-    [fetchRemovePost.fulfilled]: (state, action: PayloadAction<Posts>) => {
+    builder.addCase(fetchRemovePost.fulfilled, (state, action) => {
       state.posts = state.posts.filter(
-        (obj) => obj.id !== action.payload.data.id
+        (obj: Post) => obj.id !== action.payload.data.id
       );
-    },
+    });
     //add post
-    [addPost.fulfilled]: (state, action: PayloadAction<Posts>) => {
+    builder.addCase(addPost.fulfilled, (state, action) => {
       state.posts = [...state.posts, action.payload.data];
       console.log(state.posts);
-    },
+    });
     //update post
-    [sendUpdatedPost.fulfilled]: (state, action: PayloadAction<Posts>) => {
-      state.posts = state.posts.map((item) => {
+    builder.addCase(sendUpdatedPost.fulfilled, (state, action) => {
+      state.posts = state.posts.map((item: Post) => {
         if (item.id === action.payload.data.id) {
           return action.payload.data;
         }
         return item;
       });
-      console.log(action.payload.data);
-    },
+    });
   },
 });
 

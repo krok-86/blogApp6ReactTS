@@ -1,4 +1,4 @@
-import "./App.tsx";
+import "./App.css";
 import Posts from "./components/Posts/Posts";
 import PostEdit from "./components/PostEdit/PostEdit";
 import NewPost from "./components/NewPost/NewPost";
@@ -13,7 +13,7 @@ import { useAppDispatch } from "./hook";
 
 function App(){
     const dispatch = useAppDispatch();
-    const navigate = useNavigate()   
+    const navigate = useNavigate();   
     useEffect(() => {
         dispatch(fetchAuthMe())
         navigate(JSON.parse(window.sessionStorage.getItem('lastRoute') || '{}'))

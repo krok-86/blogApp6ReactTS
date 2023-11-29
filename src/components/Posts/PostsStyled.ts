@@ -43,12 +43,10 @@ const PostsStyled = styled.div`
     font-size: 12px;    
     padding: 5px;
     margin: 5px;
-    min-width: 45px;
-    /* min-height: 40px; */
+    min-width: 45px;   
     border-radius: 10px;
     border: none;
-    cursor:  pointer;
-    /* height: 40px; */
+    cursor:  pointer;   
     background-color: #f56855;
     color: white;
     &:hover{
