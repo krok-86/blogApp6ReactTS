@@ -2,7 +2,7 @@ import React from "react";
 import PostEditStyled from "./PostEditStyled";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Button from "../Buttons/Button";
+// import Button from "../Buttons/Button";
 import { successToast, errorToast } from "../../utils/toasts/toasts";
 import { format } from "date-fns";
 import { enGB } from "date-fns/locale";
@@ -10,6 +10,13 @@ import { getPostById } from "../../api/postApi";
 import { sendUpdatedPost } from "../../redux/slices/posts";
 import { useAppDispatch, useAppSelector } from "../../hook";
 import { Post } from "../../types";
+import { Button, Form } from "antd";
+import TextArea from "antd/es/input/TextArea";
+import { LeftOutlined } from "@ant-design/icons";
+
+// type FieldType = {
+//   onClick?: () => void,
+// };
 
 const PostEdit = () => {
   const userData = useAppSelector((state) => state.auth.data);
@@ -20,6 +27,12 @@ const PostEdit = () => {
 
   console.log(userData?.id);
   console.log(postData.user?.id);
+
+  const layout = {
+    labelCol: { span: 8 },
+    wrapperCol: { span: 16 },
+  };
+
   useEffect(() => {
     const fetchDataId = async () => {
       if (!id) return;
@@ -56,7 +69,7 @@ const PostEdit = () => {
       errorToast(err.data);
     }
   };
-  
+
   const date =
     postData?.createdAt &&
     format(new Date(postData.createdAt), "MMM d, yyyy", { locale: enGB });
@@ -64,17 +77,28 @@ const PostEdit = () => {
   return (
     <PostEditStyled>
       <div className="post-area">
-      <div className="user-head">
-      <Link to="/">
-      <Button className="post-button-area" name="⇦" /> 
-      </Link> 
-          <div className="user-text-wrap">
-          <div className="post-head">Edit form</div>
+        <div className="user-head">
+          <div className="post-wrap">
+            <Link to="/">
+              <LeftOutlined />
+            </Link>
           </div>
-        </div>        
+          <div className="user-text-wrap">
+            <div className="post-head">Edit form</div>
+          </div>
+        </div>
         <div className="post-body">
-          <div className="post-title">Post content:</div>
-          <textarea
+          {/* <div className="post-title">Post content:</div> */}
+          <Form.Item label="Post content:">
+            <TextArea
+              rows={4}
+              readOnly={postData.user?.id !== userData?.id}
+              value={postData.post}
+              onChange={updatePost}
+              placeholder="Add new post"
+            />
+          </Form.Item>
+          {/* <textarea
             readOnly={postData.user?.id !== userData?.id}
             className="post-input"
             value={postData.post}
@@ -83,7 +107,7 @@ const PostEdit = () => {
             rows={1}
           >
             {postData.post}
-          </textarea>
+          </textarea> */}
           <div className="post-info">
             <div className="post-number">post #{postData.id}</div>
             {!!postData?.topics?.length && (
@@ -98,7 +122,13 @@ const PostEdit = () => {
             {postData.user?.name?.length && (
               <div className="post-number">Author: {postData.user?.name}</div>
             )}
-            <Button handleClick={sendPost} name="save" />
+
+            <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
+              {/* <Button handleClick={sendPost} name="save" /> */}
+              <Button type="primary" onClick={sendPost} htmlType="submit">
+                Save
+              </Button>
+            </Form.Item>
           </div>
         </div>
       </div>

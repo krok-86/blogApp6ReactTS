@@ -5,6 +5,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #f9efd4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 code {
@@ -18,7 +22,8 @@ code {
   width: 716px;
   height: 100%;
   border: 2px solid #d5dde0;
-  border-radius: 20px;
+  border-radius: 10px;
+  background-color: #eeeeee;
 }
 
 .postsArea:hover {
@@ -34,7 +39,7 @@ code {
   font-weight: 900;
   padding: 5px;
   margin: 5px;
-  color: #72a0c6;
+  color: #1677ff
 }
 
 .post-body {

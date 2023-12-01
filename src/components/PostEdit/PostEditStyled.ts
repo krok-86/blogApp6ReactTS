@@ -6,6 +6,11 @@ justify-content: center;
 align-items: center;
 padding-top: 10rem;
 
+.post-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .post-body {
   padding: 5px;
   margin: 5px;
@@ -24,9 +29,11 @@ padding-top: 10rem;
 }
 .user-head {
     display: flex;
+    justify-content: space-evenly
+
   }
   .user-text-wrap {
-    width: 80%;
+    width: 90%;
     display: flex;
     justify-content: center;
     align-items: center;

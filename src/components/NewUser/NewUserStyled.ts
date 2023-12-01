@@ -3,11 +3,49 @@ import styled from "styled-components";
 const NewUserStyled = styled.div`
     display: flex;
     justify-content: center;
+    align-items: center;    
+    /* padding-top: 5rem; */   
+    margin-top: 10rem;
+    background-color: white;
+    width: 450px;
+    border: 1px solid #d5dde0;
+    border-radius: 10px;
+
+    .user-text {
+    display: flex;
     align-items: center;
-    padding-top: 10rem;
+    justify-content: center;
+    font-size: 36px;
+    font-weight: 900;
+    padding: 5px;
+    margin: 15px 50px;
+    color: #1677ff;    
+  }
+
+  .user-text-wrap {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;    
+  }
+
+  .button-wrap {
+    display: flex;
+    justify-content: space-between;
+     
+  }
+.user-header-wrap {
+  display: flex;
+  align-items: center;
+}
+  /* .user-img-wrap {
+    display:flex;
+    justify-content: center;    
+  }
+
   .user-value {  
     display: flex;
-    flex-direction: column;
+    
     width: 500px;
     height: 100%;
     padding: 0px 20px 20px 20px;
@@ -23,25 +61,7 @@ const NewUserStyled = styled.div`
   .user-head {
     display: flex;
   }
-  .user-text-wrap {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .user-text {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 36px;
-    font-weight: 900;
-    padding: 5px;
-    margin: 5px 50px;
-    color: #72a0c6;    
-  }
-  .user-img-wrap {
-    display:flex;
-    justify-content: center;
-  }
+    
   .user-input {
     width: 60%;
     margin: 10px;
@@ -62,17 +82,16 @@ const NewUserStyled = styled.div`
     width: 40%;
     aspect-ratio: 3/2;
     object-fit: contain; 
-    mix-blend-mode: color-burn;    
-    /* width: 100%;    
-    border-radius: 20px; */
+    mix-blend-mode: color-burn;   
+   
   }     
-  /* .user-avatar-wrap {
+  .user-avatar-wrap {
     display: flex;
     justify-content: enter;
     align-items: center;
     max-width: 200px;
     margin-bottom: 20px;
-  } */
+  }
   .error {
     border: 1px solid red;
   }
@@ -94,6 +113,6 @@ const NewUserStyled = styled.div`
     background-color: #ddd;
     color: black;
   }
-}  
+}   */
 `
 export default NewUserStyled;
