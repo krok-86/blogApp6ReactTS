@@ -8,7 +8,7 @@ const NewUserStyled = styled.div`
   .user-value {  
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 500px;
     height: 100%;
     padding: 0px 20px 20px 20px;
     margin: 5px;
@@ -20,6 +20,14 @@ const NewUserStyled = styled.div`
     box-shadow: 1px 2px 3px gray;
     border: 2px solid transparent;    
   }
+  .user-head {
+    display: flex;
+  }
+  .user-text-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   .user-text {
     display: flex;
     align-items: center;
@@ -27,7 +35,7 @@ const NewUserStyled = styled.div`
     font-size: 36px;
     font-weight: 900;
     padding: 5px;
-    margin: 5px;
+    margin: 5px 50px;
     color: #72a0c6;    
   }
   .user-img-wrap {
@@ -73,19 +81,19 @@ const NewUserStyled = styled.div`
     flex-flow: row nowrap;
   }
   .post-button-area {
-    width: 40px;
+    width: 50px;
+    height: 50px;
     text-decoration: none;
     border-radius: 50%;
     display: inline-block;
     padding: 8px 16px;
     background-color: #779fc4;
-    color: wheat;
+    color: white;
+    font-size: 24px;
     :hover {
     background-color: #ddd;
     color: black;
-}
-
   }
-  
+}  
 `
 export default NewUserStyled;

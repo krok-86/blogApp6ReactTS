@@ -1,16 +1,15 @@
 import React from "react";
 import PostEditStyled from "./PostEditStyled";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Button from "../Buttons/Button";
-import { successToast, errorToast } from "../Utilities/toasts";
+import { successToast, errorToast } from "../../utils/toasts/toasts";
 import { format } from "date-fns";
 import { enGB } from "date-fns/locale";
 import { getPostById } from "../../api/postApi";
 import { sendUpdatedPost } from "../../redux/slices/posts";
 import { useAppDispatch, useAppSelector } from "../../hook";
 import { Post } from "../../types";
-import { selectIsAuth } from "../../redux/slices/auth";
 
 const PostEdit = () => {
   const userData = useAppSelector((state) => state.auth.data);
@@ -57,7 +56,7 @@ const PostEdit = () => {
       errorToast(err.data);
     }
   };
-
+  
   const date =
     postData?.createdAt &&
     format(new Date(postData.createdAt), "MMM d, yyyy", { locale: enGB });
@@ -65,7 +64,14 @@ const PostEdit = () => {
   return (
     <PostEditStyled>
       <div className="post-area">
-        <div className="post-head">Edit form</div>
+      <div className="user-head">
+      <Link to="/">
+      <Button className="post-button-area" name="⇦" /> 
+      </Link> 
+          <div className="user-text-wrap">
+          <div className="post-head">Edit form</div>
+          </div>
+        </div>        
         <div className="post-body">
           <div className="post-title">Post content:</div>
           <textarea

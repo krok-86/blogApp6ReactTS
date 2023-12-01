@@ -33,5 +33,30 @@ const NewPostStyled = styled.div`
   input {
     width: 100%;
   }
-`;
+
+  .user-head {
+    display: flex;
+  }
+  .user-text-wrap {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .post-button-area {
+    width: 50px;
+    height: 50px;
+    text-decoration: none;
+    border-radius: 50%;
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #779fc4;
+    color: white;
+    font-size: 24px;
+    :hover {
+    background-color: #ddd;
+    color: black;
+  }
+}
+`
 export default NewPostStyled;

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import PostsStyled from "./PostsStyled";
 import { Link } from "react-router-dom";
 import Button from "../Buttons/Button";
-import { successToast, errorToast } from "../Utilities/toasts";
+import { successToast, errorToast } from "../../utils/toasts/toasts";
 import PostItem from "../PostItem/PostItem";
 import { fetchPosts, fetchRemovePost } from "../../redux/slices/posts";
 import { logout, selectIsAuth } from "../../redux/slices/auth";
@@ -43,10 +43,10 @@ const Posts = () => {
         <div className="post-body">
           {isAuth && (
             <div className="post-user">              
-              <div className="post-user-info">
+              {/* <div className="post-user-info">
                 <div>Log in: {userData?.name}</div>
                 <div>email: {userData?.email}</div>
-              </div>
+              </div> */}
               <div onClick={onClickLogOut} className="post-user-logOut">
                 Log out
               </div>
@@ -63,16 +63,16 @@ const Posts = () => {
             ))}
             <div className="post-button-area">
               <Link to="/createPost">
-                <Button className="post-add-button" name="Add new post" />
+                <Button className="post-add-button" name= "Add new post"/>
               </Link>
-              <Link to="/auth">
-                <Button className="post-add-button" name="Log in" />
+              <Link to={!isAuth ? "/auth" : '#'}>
+                <Button className="post-add-button"  name={isAuth ? userData?.name : "Log in"}/>
               </Link>
-              <Link to="/registration">
-                <Button className="post-add-button" name="Sign up" />
+              <Link to={!isAuth ? "/registration" : '#'}>
+                <Button className="post-add-button"  name={isAuth ? userData?.name : "Sign up"}/>
               </Link>
             </div>
-          </div>
+          </div> 
         </div>
       </div>
     </PostsStyled>

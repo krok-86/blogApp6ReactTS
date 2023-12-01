@@ -2,9 +2,9 @@ import { useForm } from "react-hook-form";
 import NewPostStyled from "./NewPostStyled";
 import { FC, useEffect, useState } from "react";
 import Select from "react-select";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../Buttons/Button";
-import { successToast, errorToast } from "../Utilities/toasts";
+import { successToast, errorToast } from "../../utils/toasts/toasts";
 import { getTopics } from "../../api/postApi";
 import { addPost } from "../../redux/slices/posts";
 import { useAppDispatch, useAppSelector } from "../../hook";
@@ -80,11 +80,18 @@ const NewPost: FC = () => {
     };
     fetchTopics();
   }, []);
-
+   
   return (
     <NewPostStyled>
       <div className="post-area">
-        <div className="post-head">Add new post:</div>
+        <div className="user-head">
+        <Link to="/">
+      <Button className="post-button-area" name="⇦" /> 
+      </Link> 
+          <div className="user-text-wrap">
+            <div className="post-head">Add new post:</div>
+          </div>
+        </div>
         <div className="post-body">
           <form onSubmit={handleSubmit(submitPosts)}>
             <textarea

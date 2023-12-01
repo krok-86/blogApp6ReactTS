@@ -4,12 +4,11 @@ import Button from "../Buttons/Button";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import unknown from "../../img/Unknown_person.jpg";
-import { successToast, errorToast } from "../Utilities/toasts";
+import { successToast, errorToast } from "../../utils/toasts/toasts";
 import { fetchAuth, fetchReg } from "../../redux/slices/auth";
 import { FC } from "react";
 import { useAppDispatch } from "../../hook";
 import { IRegistrationForm } from "../../types";
-
 interface INewUser {
   isRegistration: boolean,
 }
@@ -61,16 +60,20 @@ const NewUser: FC <INewUser> = ({ isRegistration }) => {
   const resetForm = () => {
     reset();
   };
-const goBack = () => {  
-  navigate(-1);
-};
+  
   const title = isRegistration ? "Registration" : "Authorization";
 
   return (
     <NewUserStyled>
-      <div className="user-value">
-        <Button className="post-button-area" name="<" handleClick = {goBack} />
+      <div className="user-value"> 
+      <div className="user-head">
+      <Link to="/">
+      <Button className="post-button-area" name="⇦" /> 
+      </Link> 
+        <div className= "user-text-wrap">
         <div className="user-text">{title}</div>
+        </div>
+      </div>
         <div className="user-img-wrap">
           <form onSubmit={handleSubmit(submitForm)}>
             {isRegistration && (
