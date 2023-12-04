@@ -83,15 +83,15 @@ const authSlice = createSlice({
     builder.addCase(fetchAuthMe.pending, (state) => {
       state.status = "loading";
       state.data = null;
-    }),
+    });
     builder.addCase(fetchAuthMe.fulfilled, (state, action) => {
       state.status = "loaded";
       state.data = action.payload;
-    }),
+    });
     builder.addCase(fetchAuthMe.rejected, (state) => {
       state.status = "error";
       state.data = null;
-    })
+    });
   },
 });
 

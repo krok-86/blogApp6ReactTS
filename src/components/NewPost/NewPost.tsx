@@ -85,11 +85,11 @@ const NewPost: FC = () => {
     <NewPostStyled>
       <div className="post-area">
         <div className="user-head">
-        <Link to="/">
+        {/* <Link to="/">
       <Button className="post-button-area" name="⇦" /> 
-      </Link> 
+      </Link>  */}
           <div className="user-text-wrap">
-            <div className="post-head">Add new post:</div>
+            <div className="post-head">New post</div>
           </div>
         </div>
         <div className="post-body">

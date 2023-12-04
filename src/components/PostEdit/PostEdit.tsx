@@ -10,7 +10,7 @@ import { getPostById } from "../../api/postApi";
 import { sendUpdatedPost } from "../../redux/slices/posts";
 import { useAppDispatch, useAppSelector } from "../../hook";
 import { Post } from "../../types";
-import { Button, Form } from "antd";
+import { Badge, Button, Form } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { LeftOutlined } from "@ant-design/icons";
 
@@ -84,12 +84,21 @@ const PostEdit = () => {
             </Link>
           </div>
           <div className="user-text-wrap">
-            <div className="post-head">Edit form</div>
+            <div className="post-head">Edit post</div>
           </div>
         </div>
+        <div className="post-metadata">created {date} by {postData.user?.name} </div>
+        {postData?.topics?.map((item) => ( <div className="topic-badge" key={item.id}>
+        <Badge
+        // className="site-badge-count-109"
+        count={item?.title}
+        style={{ backgroundColor: '#1677ff' }}
+      />
+      </div>
+                ))}
         <div className="post-body">
           {/* <div className="post-title">Post content:</div> */}
-          <Form.Item label="Post content:">
+          <Form.Item>
             <TextArea
               rows={4}
               readOnly={postData.user?.id !== userData?.id}
@@ -109,21 +118,21 @@ const PostEdit = () => {
             {postData.post}
           </textarea> */}
           <div className="post-info">
-            <div className="post-number">post #{postData.id}</div>
-            {!!postData?.topics?.length && (
+            {/* <div className="post-number">post #{postData.id}</div> */}
+            {/* {!!postData?.topics?.length && (
               <div className="post-topic">
                 Topic:
                 {postData?.topics?.map((item) => (
                   <div key={item.id}>{item?.title}</div>
                 ))}
               </div>
-            )}
-            <div className="post-number">Date:{date}</div>
+            )} */}
+            {/* <div className="post-number">Date:{date}</div>
             {postData.user?.name?.length && (
               <div className="post-number">Author: {postData.user?.name}</div>
-            )}
+            )} */}
 
-            <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
+            <Form.Item>
               {/* <Button handleClick={sendPost} name="save" /> */}
               <Button type="primary" onClick={sendPost} htmlType="submit">
                 Save

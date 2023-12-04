@@ -7,6 +7,7 @@ import PostItem from "../PostItem/PostItem";
 import { fetchPosts, fetchRemovePost } from "../../redux/slices/posts";
 import { logout, selectIsAuth } from "../../redux/slices/auth";
 import { useAppDispatch, useAppSelector } from "../../hook";
+import { Flex } from "antd";
 
 const Posts = () => {
   const dispatch = useAppDispatch();
@@ -52,7 +53,8 @@ const Posts = () => {
               </div>
             </div>
           )}
-          <div className="post-value">
+              <Flex gap="middle" vertical>
+          {/* <div className="post-value"> */}
             {posts.map((obj) => (
               <PostItem
                 key={obj.id}
@@ -72,7 +74,7 @@ const Posts = () => {
                 <Button className="post-add-button"  name={isAuth ? userData?.name : "Sign up"}/>
               </Link>
             </div>
-          </div> 
+            </Flex>
         </div>
       </div>
     </PostsStyled>

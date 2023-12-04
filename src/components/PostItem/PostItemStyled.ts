@@ -2,16 +2,25 @@ import styled from "styled-components";
 
 const PostItemStyled = styled.div`
   .post-value {
-    padding: 0px 20px 20px 20px;
+    display: flex;
+  flex-direction: column;
+  width: 716px;
+  height: 100%;
+  border-radius: 10px;
+  background-color: white;
+  -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+  box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+    /* padding: 0px 20px 20px 20px;
     margin: 5px;
     color: #757575;
     border: 2px solid #d5dde0;
-    border-radius: 20px;
+    border-radius: 20px; */
   }
-  .post-value:hover {
+  /* .post-value:hover {
     box-shadow: 1px 2px 3px gray;
     border: 2px solid transparent;
-  }
+  } */
   .post-text {
     word-break: break-word;
     padding: 10px;

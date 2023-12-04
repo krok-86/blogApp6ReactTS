@@ -21,11 +21,15 @@ padding-top: 10rem;
 }
 .post-info {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 .post-topic {
   padding: 5px;
   margin: 5px;
+}
+.post-metadata {
+  text-align: center;
+  color: grey;
 }
 .user-head {
     display: flex;
@@ -52,6 +56,10 @@ padding-top: 10rem;
     background-color: #ddd;
     color: black;
   }
+}
+.topic-badge {
+  text-align: end;
+  margin-right: 10px;
 }
 `
 export default PostEditStyled;

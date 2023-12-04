@@ -7,6 +7,7 @@ const PostsStyled = styled.div`
     border: 2px solid #d5dde0;
     border-radius: 20px;
     margin: 20px auto;
+    background-color: white;
   }
   .posts-head {
     display: flex;

@@ -17,7 +17,7 @@ interface INewUser {
   isRegistration: boolean,
 }
 type FieldType = {
-  username?: string;
+  name?: string;
   email?: string;
   password?: string;
   remember?: string;
@@ -84,6 +84,14 @@ const NewUser: FC <INewUser> = ({ isRegistration }) => {
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
   };
+
+  const changedLink = isRegistration ? <Link to="/auth" className="form-go-back">
+  <LeftOutlined />
+    Have account? Go to log in
+      </Link> : <Link to="/registration" className="form-go-back">
+  <LeftOutlined />
+    Have not account? Go to sign up
+      </Link>;
   
   
 
@@ -91,9 +99,6 @@ const NewUser: FC <INewUser> = ({ isRegistration }) => {
 <NewUserStyled>
     <div className= "user-text-wrap">
     <div className= "user-header-wrap">
-    <Link to="/">
-      <LeftOutlined />
-      </Link> 
       <div className="user-text">{title}</div>
     </div>      
 <Form
@@ -109,7 +114,7 @@ const NewUser: FC <INewUser> = ({ isRegistration }) => {
     {isRegistration && (
     <Form.Item<FieldType>
       label="Username"
-      name="username"
+      name="name"
       rules={[{ required: true, message: 'Please input your username!' }]}
     >
       <Input />
@@ -134,34 +139,39 @@ const NewUser: FC <INewUser> = ({ isRegistration }) => {
       <Input.Password />
     </Form.Item>
 
-    <Form.Item<FieldType>
+    {/* <Form.Item<FieldType>
       name="remember"
       valuePropName="checked"
       wrapperCol={{ offset: 8, span: 16 }}
     >
       <Checkbox>Remember me</Checkbox>
-        </Form.Item>
+        </Form.Item> */}
     <div className = "button-wrap">
-    <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+    <Form.Item >
       <Button type="primary" htmlType="submit">
         Submit
       </Button>
     </Form.Item>
-    <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+    <Form.Item>
       <Button type="primary" htmlType="reset">
         Reset
       </Button>
     </Form.Item>
-    {isRegistration && (
+    {/* {isRegistration && (
       <Link to="/auth">
         <Button type="primary">
         authorization
           </Button>
       </Link>
-    )}
+    )} */}
     </div>
   </Form>
   </div>
+  {changedLink}
+  <Link to="/" className="form-go-back form-go-back__grey">
+  <LeftOutlined />
+    Go back to posts list
+      </Link> 
   </NewUserStyled>
 
     // <NewUserStyled>

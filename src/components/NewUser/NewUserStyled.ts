@@ -2,12 +2,13 @@ import styled from "styled-components";
 
 const NewUserStyled = styled.div`
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;    
     /* padding-top: 5rem; */   
     margin-top: 10rem;
     background-color: white;
-    width: 450px;
+    max-width: 450px;
     border: 1px solid #d5dde0;
     border-radius: 10px;
 
@@ -19,24 +20,38 @@ const NewUserStyled = styled.div`
     font-weight: 900;
     padding: 5px;
     margin: 15px 50px;
-    color: #1677ff;    
+    color: #1677ff;
   }
 
   .user-text-wrap {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    flex-direction: column;    
+    flex-direction: column;
   }
 
   .button-wrap {
     display: flex;
-    justify-content: space-between;
+    width: 100%;
+    justify-content: center;
+    gap: 50px;
      
   }
 .user-header-wrap {
   display: flex;
   align-items: center;
+}
+
+.form-go-back {
+  margin-bottom: 10px;
+  text-decoration: none;
+  color: #1677ff; 
+  &__grey {
+    color: grey;
+  }
+  &:hover {
+    opacity: 0.8;
+  }
 }
   /* .user-img-wrap {
     display:flex;
