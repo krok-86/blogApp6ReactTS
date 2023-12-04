@@ -1,13 +1,15 @@
 import { useEffect } from "react";
 import PostsStyled from "./PostsStyled";
 import { Link } from "react-router-dom";
-import Button from "../Buttons/Button";
+// import Button from "../Buttons/Button";
 import { successToast, errorToast } from "../../utils/toasts/toasts";
 import PostItem from "../PostItem/PostItem";
 import { fetchPosts, fetchRemovePost } from "../../redux/slices/posts";
 import { logout, selectIsAuth } from "../../redux/slices/auth";
 import { useAppDispatch, useAppSelector } from "../../hook";
 import { Flex } from "antd";
+import { Button } from "antd";
+import { AppstoreAddOutlined, LoginOutlined, LogoutOutlined } from "@ant-design/icons";
 
 const Posts = () => {
   const dispatch = useAppDispatch();
@@ -42,17 +44,30 @@ const Posts = () => {
       <div className="posts-area">
         <div className="posts-head">Posts:</div>
         <div className="post-body">
-          {isAuth && (
+       
             <div className="post-user">              
               {/* <div className="post-user-info">
                 <div>Log in: {userData?.name}</div>
                 <div>email: {userData?.email}</div>
               </div> */}
-              <div onClick={onClickLogOut} className="post-user-logOut">
-                Log out
-              </div>
+                <div className="post-button-area">
+              <Link to="/createPost">
+                <Button className="post-add-button"><AppstoreAddOutlined />Add new post</Button>
+              </Link>
+              <Link to={!isAuth ? "/auth" : '#'}>
+                <Button className="post-add-button"><LoginOutlined />{isAuth ? userData?.name : "Log in"}</Button>
+              </Link>
+              <Link to={!isAuth ? "/registration" : '#'}>
+                <Button className="post-add-button"> {isAuth ? userData?.email : "Sign up"}</Button>
+              </Link>  
+              {isAuth && (        
+              <Button onClick={onClickLogOut} className="post-user-logOut">
+               <LogoutOutlined /> Log out 
+              </Button>
+              )}
             </div>
-          )}
+            </div>
+         
               <Flex gap="middle" vertical>
           {/* <div className="post-value"> */}
             {posts.map((obj) => (
@@ -62,18 +77,7 @@ const Posts = () => {
                 userData={userData}
                 handleClick={() => deletePost(obj.id.toString())}
               />
-            ))}
-            <div className="post-button-area">
-              <Link to="/createPost">
-                <Button className="post-add-button" name= "Add new post"/>
-              </Link>
-              <Link to={!isAuth ? "/auth" : '#'}>
-                <Button className="post-add-button"  name={isAuth ? userData?.name : "Log in"}/>
-              </Link>
-              <Link to={!isAuth ? "/registration" : '#'}>
-                <Button className="post-add-button"  name={isAuth ? userData?.name : "Sign up"}/>
-              </Link>
-            </div>
+            ))}          
             </Flex>
         </div>
       </div>

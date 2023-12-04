@@ -9,22 +9,19 @@ const NewPostStyled = styled.div`
   .post-select {
     margin: 10px 0;
   }
-  .post-buttons {
+  .post-buttons-wrap {
     width: 100%;
     display: flex;
     justify-content: center;
     gap: 20px;
   }
-  .post-button {
-    height: 40px;
-    min-width: 80px;
-    border-radius: 10px;
-    border: none;
-    background-color: #72a0c6;
-    color: white;
-    &__clear {
-      background-color: #e59d95;
-    }
+  .post-button-save {
+    background-color: #1677ff;
+    color: white;    
+  }
+  .post-button-clear {
+    background-color: #f56855;;
+    color: white;    
   }
   .post-author {
     color: grey;
@@ -37,6 +34,12 @@ const NewPostStyled = styled.div`
   .user-head {
     display: flex;
   }
+  .post-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 15px;
+}
   .user-text-wrap {
     width: 100%;
     display: flex;

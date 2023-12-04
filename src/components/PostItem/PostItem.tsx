@@ -1,10 +1,13 @@
 import PostItemStyled from "./PostItemStyled";
 import { format } from "date-fns";
 import { enGB } from "date-fns/esm/locale";
-import Button from "../Buttons/Button";
+// import Button from "../Buttons/Button";
 import { Link } from "react-router-dom";
 import { FC } from "react";
 import { IRegistrationForm, Post } from "../../types";
+import { Button } from "antd";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+
 
 interface IPostItem {
   post: Post,
@@ -34,9 +37,9 @@ const PostItem: FC <IPostItem> = ({ post, handleClick }) => {
           </div>
           <div className="post-number">Author {post?.user?.name}</div>
           <>
-            <Button handleClick={handleClick} name="Delete" />
+            <DeleteOutlined onClick={handleClick} className="post-icon"/>
             <Link to={`/postEdit/${post.id}`}>
-              <Button name="Edit" />
+              <EditOutlined className="post-icon"/>
             </Link>
           </>
         </div>

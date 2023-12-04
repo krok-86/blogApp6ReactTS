@@ -3,14 +3,15 @@ import styled from "styled-components";
 const PostItemStyled = styled.div`
   .post-value {
     display: flex;
-  flex-direction: column;
-  width: 716px;
-  height: 100%;
+  /* flex-direction: column; */
+  /* width: 716px; */
+  /* height: 100%; */
   border-radius: 10px;
   background-color: white;
   -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
   -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
   box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+  margin-top: 10px;
     /* padding: 0px 20px 20px 20px;
     margin: 5px;
     color: #757575;
@@ -35,7 +36,17 @@ const PostItemStyled = styled.div`
   .post-info {
     display: grid;
     grid-template-columns: 60px 1fr 1fr 1fr 60px 60px;
-    border-top: 1px solid #72a0c6;
+    align-items: center;    
+    border-top: 1px solid #23b9f6;
+    color: gray;
+  }
+  .post-icon {
+    
+    color: #1677ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;    
+    font-size: 22px;    
   }
 `;
 export default PostItemStyled;

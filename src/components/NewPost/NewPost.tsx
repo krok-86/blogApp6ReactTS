@@ -3,12 +3,14 @@ import NewPostStyled from "./NewPostStyled";
 import { FC, useEffect, useState } from "react";
 import Select from "react-select";
 import { Link, useNavigate } from "react-router-dom";
-import Button from "../Buttons/Button";
+// import Button from "../Buttons/Button";
 import { successToast, errorToast } from "../../utils/toasts/toasts";
 import { getTopics } from "../../api/postApi";
 import { addPost } from "../../redux/slices/posts";
 import { useAppDispatch, useAppSelector } from "../../hook";
 import { Post, SelectorType } from "../../types";
+import { Badge, Button } from "antd";
+import { LeftOutlined } from "@ant-design/icons";
 
 type TopicDataType = SelectorType | null;
 
@@ -80,14 +82,16 @@ const NewPost: FC = () => {
     };
     fetchTopics();
   }, []);
-   
+
   return (
     <NewPostStyled>
       <div className="post-area">
-        <div className="user-head">
-        {/* <Link to="/">
-      <Button className="post-button-area" name="⇦" /> 
-      </Link>  */}
+        <div className="user-head">         
+      <div className="post-wrap">
+            <Link to="/">
+              <LeftOutlined />
+            </Link>
+          </div>
           <div className="user-text-wrap">
             <div className="post-head">New post</div>
           </div>
@@ -108,13 +112,17 @@ const NewPost: FC = () => {
               required={true}
             />
             <div className="post-author"> Author: {userData?.name}</div>
-            <div className="post-buttons">
-              <Button className="post-button" name="Save" />
+            <div className="post-buttons-wrap">
+              <Button className="post-button-save" name="Save">
+                Save
+              </Button>
               <Button
-                className="post-button post-button__clear"
-                handleClick={resetSelections}
+                className="post-button-clear"
+                onClick={resetSelections}
                 name="Clear post"
-              />
+              >
+                Clear
+              </Button>
             </div>
           </form>
         </div>

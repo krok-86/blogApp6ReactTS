@@ -13,22 +13,24 @@ const PostsStyled = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 36px;
+    text-shadow: 0px 0px 5px #144683;                 
+    font-size: 50px;
     font-weight: 900;
     padding: 5px;
     margin: 5px;
-    color: #72a0c6;
+    color: #1677ff;    
   }
   .post-body {
-    border-top: 1px solid #72a0c6;
+    border-top: 1px solid #add5f5;
     padding: 5px;
     margin: 5px;
   }
   .post-user {
-    display: flex;
+    /* display: flex;
     justify-content: end;
-    font-size: 10px;
-    margin: 10px;    
+    align-items: center; */
+    /* font-size: 10px; */
+    /* margin: 10px;     */
   }
   .post-user-info {
     display: flex;
@@ -39,15 +41,15 @@ const PostsStyled = styled.div`
     color:#72a0c6; 
   }
   .post-user-logOut {
-    display: flex;
-    justify-content: end;
-    font-size: 12px;    
-    padding: 5px;
-    margin: 5px;
-    min-width: 45px;   
+    /* display: flex;
+    justify-content: center;
+    align-items: center;     */
+    /* padding: 5px;
+    margin: 5px; */
+    /* min-width: 45px;    */
     border-radius: 10px;
     border: none;
-    cursor:  pointer;   
+    /* cursor:  pointer;    */
     background-color: #f56855;
     color: white;
     &:hover{
@@ -58,21 +60,16 @@ const PostsStyled = styled.div`
     display: flex;
     flex-direction: column-reverse;
     justify-content: space-evenly;
+    /* max-width: 95%; */
+    object-fit: contain; 
   }
   .post-button-area {
     display: flex;
     justify-content: space-between;
   } 
-  .post-add-button {
-    border-radius: 50%;
-    width: 70px;
-    height: 70px;
-    background-color: #72a0c6;
-    color: white;
-    border: none;
-    &:hover {
-      opacity: 0.7;
-    }
+  .post-add-button {    
+    background-color: #1677ff;
+    color: white;    
   }
 `;
 

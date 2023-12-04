@@ -10,13 +10,10 @@ import { getPostById } from "../../api/postApi";
 import { sendUpdatedPost } from "../../redux/slices/posts";
 import { useAppDispatch, useAppSelector } from "../../hook";
 import { Post } from "../../types";
-import { Badge, Button, Form } from "antd";
+import { Badge, Button, Form} from 'antd';
 import TextArea from "antd/es/input/TextArea";
 import { LeftOutlined } from "@ant-design/icons";
 
-// type FieldType = {
-//   onClick?: () => void,
-// };
 
 const PostEdit = () => {
   const userData = useAppSelector((state) => state.auth.data);
@@ -28,10 +25,10 @@ const PostEdit = () => {
   console.log(userData?.id);
   console.log(postData.user?.id);
 
-  const layout = {
-    labelCol: { span: 8 },
-    wrapperCol: { span: 16 },
-  };
+  // const layout = {
+  //   labelCol: { span: 8 },
+  //   wrapperCol: { span: 16 },
+  // };
 
   useEffect(() => {
     const fetchDataId = async () => {
@@ -89,8 +86,7 @@ const PostEdit = () => {
         </div>
         <div className="post-metadata">created {date} by {postData.user?.name} </div>
         {postData?.topics?.map((item) => ( <div className="topic-badge" key={item.id}>
-        <Badge
-        // className="site-badge-count-109"
+        <Badge        
         count={item?.title}
         style={{ backgroundColor: '#1677ff' }}
       />
