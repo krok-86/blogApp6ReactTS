@@ -1,4 +1,4 @@
-import "./App.css";
+// import "./App.css";
 import Posts from "./components/Posts/Posts";
 import PostEdit from "./components/PostEdit/PostEdit";
 import NewPost from "./components/NewPost/NewPost";
@@ -10,41 +10,30 @@ import { fetchAuthMe } from "./redux/slices/auth";
 import { FC, useEffect, useState } from "react";
 import PrivateRoute from "./utils/router/PrivateRouter";
 import { useAppDispatch } from "./hook";
-import { Space, Switch } from "antd";
+import { ConfigProvider, Space, Switch } from "antd";
 import { ThemeProvider } from "styled-components";
+import { GlobalStyle } from "./globalStyle";
+import { theme } from "./theme";
 
 
 declare module 'styled-components'{
-    export interface DefaultTheme {
-        colors: {
-            primary:string,
-            secondary: string,
-        }
-    }
 }
 const App: FC = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     
-    const theme = {
-        colors: {
-            primary: "green",
-            secondary: "white"
-        }
-    }
-    const [currentTheme, setCurrentTheme] = useState(theme.colors.primary);
+    const [currentTheme, setCurrentTheme] = useState(theme.white);
 const switchTheme = () => {
-    setCurrentTheme((value) => (value === theme.colors.primary ? theme.colors.secondary : theme.colors.primary));
+    setCurrentTheme((value) => (value.colorPrimary === theme.white.colorPrimary ? theme.black : theme.white));
+    localStorage.setItem('theme', JSON.stringify(currentTheme));
     console.log(currentTheme)
 }
-
-    // const lightTheme = {
-    //     colorPrimary: "blue",
-    // };
-    // const darkTheme = {
-    //     colorPrimery: "black",
-    // };
         useEffect(() => {
+        const selectedThemeJSON =  localStorage.getItem('theme');
+        if (selectedThemeJSON) {
+            const selectedTheme=JSON.parse(selectedThemeJSON);
+            setCurrentTheme(selectedTheme)
+        }
         dispatch(fetchAuthMe())
         navigate(JSON.parse(window.sessionStorage.getItem('lastRoute') || '{}'))
         window.onbeforeunload = () => {
@@ -54,20 +43,20 @@ const switchTheme = () => {
     
     return (
         <>
-        // @ts-expect-error
        <ThemeProvider theme={currentTheme}>
+       <ConfigProvider theme={{token: currentTheme}}>
+       <GlobalStyle />
          <Space direction="vertical">
-         <Switch checkedChildren="light" unCheckedChildren="dark" defaultChecked 
+         <Switch checkedChildren="light" unCheckedChildren="dark" defaultChecked
          onClick={switchTheme}
-         />       
+         />
          </Space>
-       {/* > */}
         <Routes>
             <Route path="/" element={<Posts />}/>
             <Route element = {<PrivateRoute />}>
             <Route path="/createPost" element={<NewPost />}/>
             <Route path="/postEdit/:id" element={<PostEdit />}/>
-            </Route>        
+            </Route>
             <Route path="/registration" element={<NewUser isRegistration={true} />}/>
             <Route path="/auth" element={<NewUser isRegistration={false} />}/>
         </Routes>
@@ -83,8 +72,9 @@ const switchTheme = () => {
       pauseOnHover
       theme="light"
     />
+    </ConfigProvider>
     </ThemeProvider>
-        </>
+    </>
     )
 }
 

@@ -1,18 +1,20 @@
-body {
-  margin: 0;
+import { createGlobalStyle } from 'styled-components';
+
+export const GlobalStyle = createGlobalStyle`
+  html, body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #ffffff;
+  background-color: ${props => props.theme.backgroundColor};
   color: black;
   display: flex;
   justify-content: center;
   align-items: center;
-}
+  }
 
-code {
+  code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
@@ -29,29 +31,16 @@ code {
   box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
 }
 
-/* .postsArea:hover {
-  box-shadow: 1px 2px 3px gray;
-  border: 0px solid #ffffff;
-} */
-
 .post-head {
   display: flex;
     align-items: center;
     justify-content: center;
-    text-shadow: 0px 0px 5px #144683;                 
+    text-shadow: 0px 0px 5px #144683;
     font-size: 50px;
     font-weight: 900;
     padding: 5px;
     margin: 5px;
-    color: #1677ff;
-  /* display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 36px;
-  font-weight: 900;
-  padding: 5px;
-  margin: 5px;
-  color: #1677ff */
+    color: ${props => props.theme.colorPrimary};
 }
 
 .post-body {
@@ -60,7 +49,6 @@ code {
 }
 
 .post-input {
-  
   display: inline-table;
   width: 100%;
   height: calc(2.25rem + 2px);
@@ -96,3 +84,5 @@ code {
   flex-direction: column;
   font-size: 12px;
 }
+
+`;

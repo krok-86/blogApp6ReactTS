@@ -9,7 +9,7 @@ const ButtonStyled = styled.button`
     border: none;
     cursor:  pointer;
     height: 40px;
-    background-color: #72a0c6;
+    /* background-color: #72a0c6; */
     color: white;
     &:hover{
         opacity: 0.7;

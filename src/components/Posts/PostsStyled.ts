@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const PostsStyled = styled.div<{currentTheme?: string}>`
+const PostsStyled = styled.div`
   .posts-area {
     width: 716px;
     height: 100%;
@@ -13,13 +13,12 @@ const PostsStyled = styled.div<{currentTheme?: string}>`
     display: flex;
     align-items: center;
     justify-content: center;
-    text-shadow: 0px 0px 5px #144683;                 
+    text-shadow: 0px 0px 5px #144683;
     font-size: 50px;
     font-weight: 900;
     padding: 5px;
     margin: 5px;
-    color: ${props => props.currentTheme};    
-    
+    color: ${props => props.theme.colorPrimary};
   }
   .post-body {
     border-top: 1px solid #add5f5;
@@ -69,7 +68,6 @@ const PostsStyled = styled.div<{currentTheme?: string}>`
     justify-content: space-between;
   } 
   .post-add-button {    
-    background-color: #1677ff;
     color: white;    
   }
 `;

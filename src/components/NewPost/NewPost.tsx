@@ -113,13 +113,14 @@ const NewPost: FC = () => {
             />
             <div className="post-author"> Author: {userData?.name}</div>
             <div className="post-buttons-wrap">
-              <Button className="post-button-save" type= "primary">
+              <Button type= "primary">
                 Save
               </Button>
               <Button
-                className="post-button-clear"
+                danger
+                // className="post-button-clear"
                 onClick={resetSelections}
-                type= "primary"
+                // type= "primary"
               >
                 Clear
               </Button>
