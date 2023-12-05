@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const PostsStyled = styled.div`
+const PostsStyled = styled.div<{currentTheme?: string}>`
   .posts-area {
     width: 716px;
     height: 100%;
@@ -18,7 +18,8 @@ const PostsStyled = styled.div`
     font-weight: 900;
     padding: 5px;
     margin: 5px;
-    color: #1677ff;    
+    color: ${props => props.currentTheme};    
+    
   }
   .post-body {
     border-top: 1px solid #add5f5;

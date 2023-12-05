@@ -52,16 +52,16 @@ const Posts = () => {
               </div> */}
                 <div className="post-button-area">
               <Link to="/createPost">
-                <Button className="post-add-button"><AppstoreAddOutlined />Add new post</Button>
+                <Button className="post-add-button" type= "primary"><AppstoreAddOutlined />Add new post</Button>
               </Link>
               <Link to={!isAuth ? "/auth" : '#'}>
-                <Button className="post-add-button"><LoginOutlined />{isAuth ? userData?.name : "Log in"}</Button>
+                <Button className="post-add-button" type= "primary"><LoginOutlined />{isAuth ? userData?.name : "Log in"}</Button>
               </Link>
               <Link to={!isAuth ? "/registration" : '#'}>
-                <Button className="post-add-button"> {isAuth ? userData?.email : "Sign up"}</Button>
+                <Button className="post-add-button" type= "primary"> {isAuth ? userData?.email : "Sign up"}</Button>
               </Link>  
               {isAuth && (        
-              <Button onClick={onClickLogOut} className="post-user-logOut">
+              <Button onClick={onClickLogOut} className="post-user-logOut" type= "primary">
                <LogoutOutlined /> Log out 
               </Button>
               )}

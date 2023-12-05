@@ -9,7 +9,7 @@ import { getTopics } from "../../api/postApi";
 import { addPost } from "../../redux/slices/posts";
 import { useAppDispatch, useAppSelector } from "../../hook";
 import { Post, SelectorType } from "../../types";
-import { Badge, Button } from "antd";
+import { Button } from "antd";
 import { LeftOutlined } from "@ant-design/icons";
 
 type TopicDataType = SelectorType | null;
@@ -38,7 +38,7 @@ const NewPost: FC = () => {
 
   interface ITopicTitle {
     [label: string]: string;
-    [value: number]: string; //fix?
+    [value: number]: string; 
   }
   const topicTitle = topics.map((item: ITopicTitle) => ({
     label: item.title,
@@ -113,13 +113,13 @@ const NewPost: FC = () => {
             />
             <div className="post-author"> Author: {userData?.name}</div>
             <div className="post-buttons-wrap">
-              <Button className="post-button-save" name="Save">
+              <Button className="post-button-save" type= "primary">
                 Save
               </Button>
               <Button
                 className="post-button-clear"
                 onClick={resetSelections}
-                name="Clear post"
+                type= "primary"
               >
                 Clear
               </Button>
