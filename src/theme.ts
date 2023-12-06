@@ -8,9 +8,10 @@ export const theme = {
       colorTextInfo: "#4211c3",
       backgroundColorPosts: "#fcfffc",
       backgroundColorPost: "#fcfffc",
-      // backgroundImg: ,
+      backgroundImg: '/fone.jpg',
       borderPosts: "2px solid #eee3fb",
       borderPost: "1px solid #cfacf5",
+
       
   },
   black: {
@@ -22,7 +23,7 @@ export const theme = {
        colorTextInfo: "#b376ef",
        backgroundColorPosts: "#0f120e",
        backgroundColorPost: "#1a1d1a",
-      // backgroundImg: ,
+       backgroundImg: '/fone.jpg',
       borderPosts: "2px solid #b478f9",
       borderPost: "1px solid #b478f9",
   },

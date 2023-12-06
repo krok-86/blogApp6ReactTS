@@ -65,6 +65,8 @@ const PostEdit = () => {
     postData?.createdAt &&
     format(new Date(postData.createdAt), "MMM d, yyyy", { locale: enGB });
 
+console.log(postData?.topics)
+
   return (
     <PostEditStyled>
       <div className="post-area-global">
@@ -79,13 +81,16 @@ const PostEdit = () => {
           </div>
         </div>
         <div className="post-info">created {date} by {postData.user?.name} </div>
+        <div className="post-badges">
         {postData?.topics?.map((item) => ( <div className="post-badge" key={item.id}>
         <Badge        
         count={item?.title}
-        style={{ backgroundColor: '#1677ff' }}
+        // style={{ backgroundColor: '#1677ff' }}
+        className="post-badges"
       />
       </div>
                 ))}
+                </div>
         <div className="post-body">          
           <Form.Item>
             <TextArea

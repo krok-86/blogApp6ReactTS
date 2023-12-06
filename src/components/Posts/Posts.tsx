@@ -69,7 +69,7 @@ const Posts = () => {
               </Link>
               {isAuth && (
                 <Button onClick={onClickLogOut}
-                className="post-logOut-button"
+                className="post-logOut-button danger"
                 type="primary">
                   <LogoutOutlined /> Log out
                 </Button>

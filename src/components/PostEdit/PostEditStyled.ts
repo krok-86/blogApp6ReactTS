@@ -23,11 +23,16 @@ const PostEditStyled = styled.div`
   }
   .post-info {
     text-align: center;
-    color: ${props => props.theme.colorTextInfo};
+    /* color: ${props => props.theme.colorTextInfo}; */
   }
   .post-badge {
     text-align: end;
     margin-right: 10px;
+  }
+  .post-badges {
+    display: flex;
+    justify-content: flex-end;
+    color: green;
   }
   /* .post-body {
     padding: 5px;

@@ -36,6 +36,15 @@ const PostsStyled = styled.div`
     color: ${props => props.theme.colorText}
     
   }
+  /* .danger {
+    background-color: ${props => props.theme.colorSecondary};
+    &:hover {
+      background-color: ${props => props.theme.colorSecondary} !important;
+    }
+    &:active {
+      background-color: ${props => props.theme.colorSecondary} !important;
+    } */
+  }
 `;
 
 export default PostsStyled;
