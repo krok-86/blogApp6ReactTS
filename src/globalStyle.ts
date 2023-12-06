@@ -7,6 +7,7 @@ export const GlobalStyle = createGlobalStyle`
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* background-image: url('/fone.jpg'); */
   background-color: ${props => props.theme.backgroundColor};
   color: black;
   display: flex;
@@ -19,19 +20,19 @@ export const GlobalStyle = createGlobalStyle`
     monospace;
 }
 
-.post-area {
+.post-area-global {
   display: flex;
   flex-direction: column;
   width: 716px;
   height: 100%;
   border-radius: 10px;
-  background-color: white;
+  background-color: ${props => props.theme.backgroundColorPosts};
   -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
   -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
   box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
 }
 
-.post-head {
+.post-head-global {
   display: flex;
     align-items: center;
     justify-content: center;

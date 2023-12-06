@@ -4,10 +4,10 @@ const PostsStyled = styled.div`
   .posts-area {
     width: 716px;
     height: 100%;
-    border: 2px solid #d5dde0;
+    border: ${props => props.theme.borderPosts};
     border-radius: 20px;
     margin: 20px auto;
-    background-color: white;
+    background-color: ${props => props.theme.backgroundColorPosts};
   }
   .posts-head {
     display: flex;
@@ -21,54 +21,20 @@ const PostsStyled = styled.div`
     color: ${props => props.theme.colorPrimary};
   }
   .post-body {
-    border-top: 1px solid #add5f5;
+    border-top: ${props => props.theme.borderPost};
     padding: 5px;
     margin: 5px;
-  }
-  .post-user {
-    /* display: flex;
-    justify-content: end;
-    align-items: center; */
-    /* font-size: 10px; */
-    /* margin: 10px;     */
-  }
-  .post-user-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: start;
-    border-radius: 12px;    
-    color:#72a0c6; 
-  }
-  .post-user-logOut {
-    /* display: flex;
-    justify-content: center;
-    align-items: center;     */
-    /* padding: 5px;
-    margin: 5px; */
-    /* min-width: 45px;    */
-    border-radius: 10px;
-    border: none;
-    /* cursor:  pointer;    */
-    background-color: #f56855;
-    color: white;
-    &:hover{
-        opacity: 0.7;
-    }
-  }
-  .post-value {
-    display: flex;
-    flex-direction: column-reverse;
-    justify-content: space-evenly;
-    /* max-width: 95%; */
-    object-fit: contain; 
-  }
+  }  
   .post-button-area {
     display: flex;
     justify-content: space-between;
   } 
   .post-add-button {    
-    color: white;    
+    color: ${props => props.theme.colorText}
+  }
+  .post-logOut-button{
+    color: ${props => props.theme.colorText}
+    
   }
 `;
 

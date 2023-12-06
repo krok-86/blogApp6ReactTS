@@ -24,18 +24,18 @@ const PostItem: FC <IPostItem> = ({ post, handleClick }) => {
     <PostItemStyled>
       <div className="post-value">
         <div className="post-info">
-          <div className="post-number">Post #{post.id}</div>
-          <div className="post-number post-topic">
+          <div>Post #{post.id}</div>
+          <div>
             Topic:
             {post?.topics?.map((item) => (
               <div key={item.id}>{item?.title}</div>
             ))}
           </div>
-          <div className="post-number">
+          <div>
             <div>Created at</div>
             <div>{date || ""}</div>
           </div>
-          <div className="post-number">Author {post?.user?.name}</div>
+          <div>Author {post?.user?.name}</div>
           <>
             <DeleteOutlined onClick={handleClick} className="post-icon"/>
             <Link to={`/postEdit/${post.id}`}>

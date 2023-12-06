@@ -1,4 +1,3 @@
-// import "./App.css";
 import Posts from "./components/Posts/Posts";
 import PostEdit from "./components/PostEdit/PostEdit";
 import NewPost from "./components/NewPost/NewPost";
@@ -16,24 +15,26 @@ import { GlobalStyle } from "./globalStyle";
 import { theme } from "./theme";
 
 
+
 declare module 'styled-components'{
 }
 const App: FC = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     
-    const [currentTheme, setCurrentTheme] = useState(theme.white);
-const switchTheme = () => {
-    setCurrentTheme((value) => (value.colorPrimary === theme.white.colorPrimary ? theme.black : theme.white));
-    localStorage.setItem('theme', JSON.stringify(currentTheme));
-    console.log(currentTheme)
-}
-        useEffect(() => {
-        const selectedThemeJSON =  localStorage.getItem('theme');
-        if (selectedThemeJSON) {
-            const selectedTheme=JSON.parse(selectedThemeJSON);
-            setCurrentTheme(selectedTheme)
-        }
+    const [currentTheme, setCurrentTheme] = useState(() => {
+      const storedTheme = localStorage.getItem("mode");
+      const mode = storedTheme ? JSON.parse(storedTheme) : theme.white;
+      return mode;
+    });
+    
+    const switchTheme = () => {
+      const newTheme = currentTheme.colorPrimary === theme.white.colorPrimary ? theme.black : theme.white;
+      setCurrentTheme(newTheme);
+      localStorage.setItem("mode", JSON.stringify(newTheme));
+      return newTheme;
+    };
+        useEffect(() => {      
         dispatch(fetchAuthMe())
         navigate(JSON.parse(window.sessionStorage.getItem('lastRoute') || '{}'))
         window.onbeforeunload = () => {
@@ -47,7 +48,7 @@ const switchTheme = () => {
        <ConfigProvider theme={{token: currentTheme}}>
        <GlobalStyle />
          <Space direction="vertical">
-         <Switch checkedChildren="light" unCheckedChildren="dark" defaultChecked
+         <Switch checkedChildren="dark" unCheckedChildren="light" defaultChecked
          onClick={switchTheme}
          />
          </Space>

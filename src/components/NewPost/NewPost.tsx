@@ -85,7 +85,7 @@ const NewPost: FC = () => {
 
   return (
     <NewPostStyled>
-      <div className="post-area">
+      <div className="post-area-global">
         <div className="user-head">         
       <div className="post-wrap">
             <Link to="/">
@@ -93,7 +93,7 @@ const NewPost: FC = () => {
             </Link>
           </div>
           <div className="user-text-wrap">
-            <div className="post-head">New post</div>
+            <div className="post-head-global">New post</div>
           </div>
         </div>
         <div className="post-body">

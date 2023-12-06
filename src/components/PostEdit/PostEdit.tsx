@@ -2,7 +2,6 @@ import React from "react";
 import PostEditStyled from "./PostEditStyled";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-// import Button from "../Buttons/Button";
 import { successToast, errorToast } from "../../utils/toasts/toasts";
 import { format } from "date-fns";
 import { enGB } from "date-fns/locale";
@@ -24,12 +23,7 @@ const PostEdit = () => {
 
   console.log(userData?.id);
   console.log(postData.user?.id);
-
-  // const layout = {
-  //   labelCol: { span: 8 },
-  //   wrapperCol: { span: 16 },
-  // };
-
+  
   useEffect(() => {
     const fetchDataId = async () => {
       if (!id) return;
@@ -73,27 +67,26 @@ const PostEdit = () => {
 
   return (
     <PostEditStyled>
-      <div className="post-area">
-        <div className="user-head">
+      <div className="post-area-global">
+        <div className="post-head">
           <div className="post-wrap">
             <Link to="/">
               <LeftOutlined />
             </Link>
           </div>
           <div className="user-text-wrap">
-            <div className="post-head">Edit post</div>
+            <div className="post-head-global">Edit post</div>
           </div>
         </div>
-        <div className="post-metadata">created {date} by {postData.user?.name} </div>
-        {postData?.topics?.map((item) => ( <div className="topic-badge" key={item.id}>
+        <div className="post-info">created {date} by {postData.user?.name} </div>
+        {postData?.topics?.map((item) => ( <div className="post-badge" key={item.id}>
         <Badge        
         count={item?.title}
         style={{ backgroundColor: '#1677ff' }}
       />
       </div>
                 ))}
-        <div className="post-body">
-          {/* <div className="post-title">Post content:</div> */}
+        <div className="post-body">          
           <Form.Item>
             <TextArea
               rows={4}
@@ -102,34 +95,9 @@ const PostEdit = () => {
               onChange={updatePost}
               placeholder="Add new post"
             />
-          </Form.Item>
-          {/* <textarea
-            readOnly={postData.user?.id !== userData?.id}
-            className="post-input"
-            value={postData.post}
-            onChange={updatePost}
-            placeholder="Add new post"
-            rows={1}
-          >
-            {postData.post}
-          </textarea> */}
-          <div className="post-info">
-            {/* <div className="post-number">post #{postData.id}</div> */}
-            {/* {!!postData?.topics?.length && (
-              <div className="post-topic">
-                Topic:
-                {postData?.topics?.map((item) => (
-                  <div key={item.id}>{item?.title}</div>
-                ))}
-              </div>
-            )} */}
-            {/* <div className="post-number">Date:{date}</div>
-            {postData.user?.name?.length && (
-              <div className="post-number">Author: {postData.user?.name}</div>
-            )} */}
-
-            <Form.Item>
-              {/* <Button handleClick={sendPost} name="save" /> */}
+          </Form.Item>         
+          <div className="post-button-wrap">            
+            <Form.Item>              
               <Button type="primary" onClick={sendPost} htmlType="submit">
                 Save
               </Button>
