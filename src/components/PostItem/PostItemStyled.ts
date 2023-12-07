@@ -14,12 +14,13 @@ const PostItemStyled = styled.div`
     margin-top: 10px;    
   }  
   .post-info {
-    display: grid;
-    grid-template-columns: 60px 1fr 1fr 1fr 60px 60px;
-    align-items: center;
+    display: flex;
+    flex-flow: row wrap;
+    gap: 20px;
+    justify-content: space-between;
     border-top: ${props => props.theme.borderPost};
     color: ${props => props.theme.colorTextInfo};
-    padding: 10px;
+
   }
   .post-icon {
     color: ${props => props.theme.colorPrimary};
@@ -34,5 +35,14 @@ const PostItemStyled = styled.div`
     white-space: pre-wrap;
     color: ${props => props.theme.colorTextPost};
   }  
+
+  @media (min-width: 768px) {
+    .post-info {
+    display: grid;
+    grid-template-columns: 60px 1fr 1fr 1fr 60px 60px;
+    align-items: center;
+    padding: 10px;
+  }
+}
 `;
 export default PostItemStyled;

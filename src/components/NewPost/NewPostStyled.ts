@@ -30,6 +30,9 @@ const NewPostStyled = styled.div`
     opacity: .7;
   }
   .custom-select{
+    &__single-value {
+      color: ${props => props.theme.colorTextPost}!important;
+    }
     &__control {
       cursor: pointer;
       background-color: ${props => props.theme.backgroundColorPost}!important;
@@ -55,6 +58,11 @@ const NewPostStyled = styled.div`
       color: green !important; */
       &--is-focused {
         background-color: #cfacf5 !important;
+      }
+      &--is-selected {
+        background-color: #cfacf5 !important;
+        color: white !important;
+        opacity: 0.5 !important;
       }
     }
 }

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const PostsStyled = styled.div`
   .posts-area {
-    width: 716px;
+    width: 350px;
     height: 100%;
     border: ${props => props.theme.borderPosts};
     border-radius: 20px;
@@ -28,6 +28,7 @@ const PostsStyled = styled.div`
   .post-button-area {
     display: flex;
     justify-content: space-between;
+    flex-flow: row wrap;
   } 
   .post-add-button {    
     color: ${props => props.theme.colorText}
@@ -45,6 +46,11 @@ const PostsStyled = styled.div`
       background-color: ${props => props.theme.colorSecondary} !important;
     } */
   /* } */
+  @media (min-width: 768px) {
+    .posts-area {
+    width: 716px;
+  }
+}
 `;
 
 export default PostsStyled;

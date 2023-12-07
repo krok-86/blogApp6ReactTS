@@ -62,7 +62,7 @@ const NewUserStyled = styled.div`
   .form-go-back {
     margin-bottom: 10px;
     text-decoration: none;
-    color: #1677ff;
+    color: ${props => props.theme.colorPrimary};
     &__grey {
       color: grey;
     }
@@ -70,5 +70,26 @@ const NewUserStyled = styled.div`
       opacity: 0.8;
     }
   }
+
+  .ant-input {
+    background-color: ${props => props.theme.backgroundColorPost} !important;
+    color: ${props => props.theme.colorTextInfo};
+    &-affix-wrapper {
+      background-color: ${props => props.theme.colorPrimary} !important;
+    }
+  }
+
+  .ant-form-item-label {
+    label {
+      color: ${props => props.theme.colorPrimary};
+    }
+  }
+
+  input:-webkit-autofill{
+    -webkit-text-fill-color: ${props => props.theme.colorTextInfo};
+    background-color: ${props => props.theme.colorTextInfo} !important;
+    transition: background-color 5000s ease-in-out 0s;
+    box-shadow: inset 0 0 20px 20px ${props => props.theme.backgroundColorPost};
+}
 `;
 export default NewUserStyled;

@@ -97,11 +97,13 @@ const NewPost: FC = () => {
         </div>
         <div className="post-body">
           <form onSubmit={handleSubmit(submitPosts)}>
+            <div className="post-input__wrapper">
             <textarea
               className="post-input"
               {...register("postText", { required: true })}
               placeholder="Enter your post here..."
             />
+            </div>
              {/* <Form.Item label="Select">
           <Select>
             <Select.Option
@@ -126,6 +128,7 @@ const NewPost: FC = () => {
             <div className="post-buttons-wrap">
               <Button type= "primary"
               className="post-save-button"
+              htmlType="submit"
               >
                 Save
               </Button>

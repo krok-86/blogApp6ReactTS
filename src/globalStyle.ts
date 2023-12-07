@@ -23,7 +23,7 @@ export const GlobalStyle = createGlobalStyle`
 .post-area-global {
   display: flex;
   flex-direction: column;
-  width: 716px;
+  width: 350px;
   height: 100%;
   border-radius: 10px;
   border: ${props => props.theme.borderPosts};
@@ -65,6 +65,10 @@ export const GlobalStyle = createGlobalStyle`
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   resize: vertical;
+  &__wrapper {
+    height: fit-content;
+    background-color: ${props => props.theme.backgroundColorPost};
+  }
 }
 
 .post-input:focus {
@@ -85,6 +89,16 @@ export const GlobalStyle = createGlobalStyle`
   display: flex;
   flex-direction: column;
   font-size: 12px;
+}
+
+.ant-badge-count {
+  background-color: ${props => props.theme.colorTextInfo} !important;
+}
+
+@media (min-width: 768px) {
+  .post-area-global {
+    width: 716px;
+  }
 }
 
 `;
