@@ -6,31 +6,6 @@ const NewPostStyled = styled.div`
   align-items: center;
   padding-top: 10rem;
 
-  .post-select {
-    margin: 10px 0;
-  }
-  .post-buttons-wrap {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-  }
-  .post-button-save {
-    background-color: #1677ff;
-    color: white;    
-  }
-  .post-button-clear {
-    background-color: #f56855;;
-    color: white;    
-  }
-  .post-author {
-    color: grey;
-    text-align: end;
-  }
-  input {
-    width: 100%;
-  }
-
   .user-head {
     display: flex;
   }
@@ -40,26 +15,66 @@ const NewPostStyled = styled.div`
   justify-content: center;
   margin-left: 15px;
 }
+  .post-arrow-back {
+    color: ${props => props.theme.colorPrimary};
+  }
   .user-text-wrap {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  .post-button-area {
-    width: 50px;
-    height: 50px;
-    text-decoration: none;
-    border-radius: 50%;
-    display: inline-block;
-    padding: 8px 16px;
-    background-color: #779fc4;
-    color: white;
-    font-size: 24px;
-    :hover {
-    background-color: #ddd;
-    color: black;
+ 
+  ::placeholder {    
+    color: ${props => props.theme.colorTextPlaceHolder};
+    opacity: .7;
   }
+  .custom-select{
+    &__control {
+      cursor: pointer;
+      background-color: ${props => props.theme.backgroundColorPost}!important;
+      color: ${props => props.theme.colorTextPost}!important;
+      border: ${props => props.theme.borderPost}!important;
+      
+      /* &--menu-is-open {        
+        color: red;
+        background-color: red;
+      } */
+      
+    }
+    &__multi-value {
+      background-color: green !important;
+    }
+    &__menu {
+        background-color: ${props => props.theme.backgroundColorPost}!important;
+        color: ${props => props.theme.colorTextPost}!important;
+      }
+    &__option {
+      cursor: pointer;
+      /* background-color: gray !important;
+      color: green !important; */
+      &--is-focused {
+        background-color: #cfacf5 !important;
+      }
+    }
 }
+  .post-select {
+    margin: 10px 0;
+    width: 100%;    
+    color:${props => props.theme.colorTextPost};    
+  }  
+  .post-author {
+    color: ${props => props.theme.colorTextInfo};
+    text-align: end;
+  }  
+  .post-buttons-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  .post-save-button {    
+    color: ${props => props.theme.colorText}
+  }  
 `
 export default NewPostStyled;

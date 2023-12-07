@@ -44,7 +44,7 @@ const PostsStyled = styled.div`
     &:active {
       background-color: ${props => props.theme.colorSecondary} !important;
     } */
-  }
+  /* } */
 `;
 
 export default PostsStyled;

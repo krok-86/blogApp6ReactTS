@@ -72,7 +72,7 @@ console.log(postData?.topics)
       <div className="post-area-global">
         <div className="post-head">
           <div className="post-wrap">
-            <Link to="/">
+            <Link to="/" className="post-arrow-back">
               <LeftOutlined />
             </Link>
           </div>
@@ -83,10 +83,10 @@ console.log(postData?.topics)
         <div className="post-info">created {date} by {postData.user?.name} </div>
         <div className="post-badges">
         {postData?.topics?.map((item) => ( <div className="post-badge" key={item.id}>
-        <Badge        
+        <Badge 
+        className="post-badge"
         count={item?.title}
         // style={{ backgroundColor: '#1677ff' }}
-        className="post-badges"
       />
       </div>
                 ))}
@@ -94,6 +94,7 @@ console.log(postData?.topics)
         <div className="post-body">          
           <Form.Item>
             <TextArea
+              className="post-textArea"
               rows={4}
               readOnly={postData.user?.id !== userData?.id}
               value={postData.post}
@@ -103,7 +104,10 @@ console.log(postData?.topics)
           </Form.Item>         
           <div className="post-button-wrap">            
             <Form.Item>              
-              <Button type="primary" onClick={sendPost} htmlType="submit">
+              <Button className="post-color-text" 
+              type="primary"
+              onClick={sendPost}
+              htmlType="submit">
                 Save
               </Button>
             </Form.Item>

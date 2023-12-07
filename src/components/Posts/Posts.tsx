@@ -63,7 +63,7 @@ const Posts = () => {
               </Link>
               <Link to={!isAuth ? "/registration" : "#"}>
                 <Button className="post-add-button" type="primary">
-                  {" "}
+                  {/* {" "} */}
                   {isAuth ? userData?.email : "Sign up"}
                 </Button>
               </Link>

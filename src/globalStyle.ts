@@ -26,6 +26,7 @@ export const GlobalStyle = createGlobalStyle`
   width: 716px;
   height: 100%;
   border-radius: 10px;
+  border: ${props => props.theme.borderPosts};
   background-color: ${props => props.theme.backgroundColorPosts};
   -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
   -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
@@ -51,14 +52,14 @@ export const GlobalStyle = createGlobalStyle`
 
 .post-input {
   display: inline-table;
-  width: 100%;
+  width: 99%;
   height: calc(2.25rem + 2px);
   font-family: inherit;
   font-size: 1rem;
   font-weight: 400;
-  line-height: 1.5;
-  color: #212529;
-  background-color: #fff;
+  line-height: 1.5;  
+  background-color: ${props => props.theme.backgroundColorPost};
+  color: ${props => props.theme.colorTextPost};
   background-clip: padding-box;
   border: none;
   border-radius: 0.25rem;

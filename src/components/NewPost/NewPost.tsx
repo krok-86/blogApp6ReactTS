@@ -3,7 +3,6 @@ import NewPostStyled from "./NewPostStyled";
 import { FC, useEffect, useState } from "react";
 import Select from "react-select";
 import { Link, useNavigate } from "react-router-dom";
-// import Button from "../Buttons/Button";
 import { successToast, errorToast } from "../../utils/toasts/toasts";
 import { getTopics } from "../../api/postApi";
 import { addPost } from "../../redux/slices/posts";
@@ -88,7 +87,7 @@ const NewPost: FC = () => {
       <div className="post-area-global">
         <div className="user-head">         
       <div className="post-wrap">
-            <Link to="/">
+            <Link to="/" className="post-arrow-back">
               <LeftOutlined />
             </Link>
           </div>
@@ -103,6 +102,17 @@ const NewPost: FC = () => {
               {...register("postText", { required: true })}
               placeholder="Enter your post here..."
             />
+             {/* <Form.Item label="Select">
+          <Select>
+            <Select.Option
+            value={topicData}
+            options={topicTitle}
+            onChange={(value:TopicDataType) => handleSelectTopic(value)}
+            placeholder="Select topic..."
+            // required={true}
+            >Demo</Select.Option>
+          </Select>
+        </Form.Item> */}
             <Select
               className="post-select"
               options={topicTitle}
@@ -110,17 +120,20 @@ const NewPost: FC = () => {
               placeholder="Select topic..."
               value={topicData}
               required={true}
+              classNamePrefix="custom-select"
             />
             <div className="post-author"> Author: {userData?.name}</div>
             <div className="post-buttons-wrap">
-              <Button type= "primary">
+              <Button type= "primary"
+              className="post-save-button"
+              >
                 Save
               </Button>
               <Button
-                danger
-                // className="post-button-clear"
+                // danger
+                className="post-save-button"
                 onClick={resetSelections}
-                // type= "primary"
+                type= "primary"
               >
                 Clear
               </Button>
