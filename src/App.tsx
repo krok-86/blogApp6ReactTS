@@ -14,7 +14,8 @@ import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "./globalStyle";
 import { theme } from "./theme";
 
-declare module "styled-components" {}
+declare module "styled-components" {};//???
+
 const App: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -46,7 +47,7 @@ const App: FC = () => {
   }, []);
 
   return (
-    <>
+    <>    
       <ThemeProvider theme={currentTheme}>
         <ConfigProvider theme={{ token: currentTheme }}>
           <GlobalStyle />
@@ -54,10 +55,10 @@ const App: FC = () => {
             <Switch
               checkedChildren="dark"
               unCheckedChildren="light"
-              defaultChecked
+              // defaultChecked
               onClick={switchTheme}
             />
-          </Space>
+          </Space>         
           <Routes>
             <Route path="/" element={<Posts />} />
             <Route element={<PrivateRoute />}>
@@ -69,7 +70,7 @@ const App: FC = () => {
               element={<NewUser isRegistration={true} />}
             />
             <Route path="/auth" element={<NewUser isRegistration={false} />} />
-          </Routes>
+          </Routes>          
           <ToastContainer
             position="top-right"
             autoClose={5000}
@@ -81,10 +82,10 @@ const App: FC = () => {
             draggable
             pauseOnHover
             theme="light"
-          />
+          />          
         </ConfigProvider>
-      </ThemeProvider>
-    </>
+      </ThemeProvider>             
+      </>
   );
 };
 

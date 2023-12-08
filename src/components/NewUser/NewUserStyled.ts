@@ -31,7 +31,7 @@ const NewUserStyled = styled.div`
     margin: 15px 50px;
     color: ${(props) => props.theme.colorPrimary};
   }
-  .ant-form-item-required {
+  .ant-form-item-required {//fix
     ::text {
       color: red;      
     }
@@ -64,11 +64,17 @@ const NewUserStyled = styled.div`
   }
   .ant-input {
     background-color: ${(props) => props.theme.backgroundColorPost} !important;
-    color: ${(props) => props.theme.colorTextInfo};
+    color: ${(props) => props.theme.colorTextInfo} !important;
+    /* border-color: ${(props) => props.theme.borderAuthBefore} !important;
+    border-color: ${(props) => props.theme.borderAuthAfter} !important; */
     &-affix-wrapper {
-      background-color: ${(props) => props.theme.colorPrimary} !important;
+      background-color: ${(props) => props.theme.backgroundColorPost} !important;
+      
     }
+    &-password-icon {
+      color: ${(props) => props.theme.colorTextInfo} !important;
   }
+}
   .ant-form-item-label {
     label {
       color: ${(props) => props.theme.colorPrimary};
