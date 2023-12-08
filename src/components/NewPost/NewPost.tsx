@@ -37,7 +37,7 @@ const NewPost: FC = () => {
 
   interface ITopicTitle {
     [label: string]: string;
-    [value: number]: string; 
+    [value: number]: string;
   }
   const topicTitle = topics.map((item: ITopicTitle) => ({
     label: item.title,
@@ -85,8 +85,8 @@ const NewPost: FC = () => {
   return (
     <NewPostStyled>
       <div className="post-area-global">
-        <div className="user-head">         
-      <div className="post-wrap">
+        <div className="user-head">
+          <div className="post-wrap">
             <Link to="/" className="post-arrow-back">
               <LeftOutlined />
             </Link>
@@ -98,23 +98,12 @@ const NewPost: FC = () => {
         <div className="post-body">
           <form onSubmit={handleSubmit(submitPosts)}>
             <div className="post-input__wrapper">
-            <textarea
-              className="post-input"
-              {...register("postText", { required: true })}
-              placeholder="Enter your post here..."
-            />
+              <textarea
+                className="post-input"
+                {...register("postText", { required: true })}
+                placeholder="Enter your post here..."
+              />
             </div>
-             {/* <Form.Item label="Select">
-          <Select>
-            <Select.Option
-            value={topicData}
-            options={topicTitle}
-            onChange={(value:TopicDataType) => handleSelectTopic(value)}
-            placeholder="Select topic..."
-            // required={true}
-            >Demo</Select.Option>
-          </Select>
-        </Form.Item> */}
             <Select
               className="post-select"
               options={topicTitle}
@@ -126,9 +115,10 @@ const NewPost: FC = () => {
             />
             <div className="post-author"> Author: {userData?.name}</div>
             <div className="post-buttons-wrap">
-              <Button type= "primary"
-              className="post-save-button"
-              htmlType="submit"
+              <Button
+                type="primary"
+                className="post-save-button"
+                htmlType="submit"
               >
                 Save
               </Button>
@@ -136,7 +126,7 @@ const NewPost: FC = () => {
                 // danger
                 className="post-save-button"
                 onClick={resetSelections}
-                type= "primary"
+                type="primary"
               >
                 Clear
               </Button>

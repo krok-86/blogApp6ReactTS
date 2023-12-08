@@ -6,9 +6,9 @@ const NewUserStyled = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 10rem;
-  background-color: ${props => props.theme.backgroundColorPosts};
+  background-color: ${(props) => props.theme.backgroundColorPosts};
   max-width: 450px;
-  border: ${props => props.theme.borderPosts};
+  border: ${(props) => props.theme.borderPosts};
   border-radius: 10px;
 
   .user-text-wrap {
@@ -29,40 +29,32 @@ const NewUserStyled = styled.div`
     font-weight: 900;
     padding: 5px;
     margin: 15px 50px;
-    color: ${props => props.theme.colorPrimary};
+    color: ${(props) => props.theme.colorPrimary};
   }
-  
-    .ant-form-item-required{
-      ::text {
-        color: red;
-     /* color: red; */
-      }
+  .ant-form-item-required {
+    ::text {
+      color: red;      
     }
-    .newUser-text {
-      ::placeholder {    
-    color: ${props => props.theme.colorTextPlaceHolder};
-    opacity: .7;
-  }  
+  }
+  .newUser-text {
+    ::placeholder {
+      color: ${(props) => props.theme.colorTextPlaceHolder};
+      opacity: 0.7;
     }
-  /* input {
-    background-color: ${props => props.theme.backgroundColorPost};
-    color: ${props => props.theme.colorTextInfo};
-    border: ${props => props.theme.borderPost};
-  } */
-  
+  }
   .button-wrap {
     display: flex;
     width: 100%;
     justify-content: center;
     gap: 50px;
   }
-  .user-button {    
-    color: ${props => props.theme.colorText}
+  .user-button {
+    color: ${(props) => props.theme.colorText};
   }
   .form-go-back {
     margin-bottom: 10px;
     text-decoration: none;
-    color: ${props => props.theme.colorPrimary};
+    color: ${(props) => props.theme.colorPrimary};
     &__grey {
       color: grey;
     }
@@ -70,26 +62,24 @@ const NewUserStyled = styled.div`
       opacity: 0.8;
     }
   }
-
   .ant-input {
-    background-color: ${props => props.theme.backgroundColorPost} !important;
-    color: ${props => props.theme.colorTextInfo};
+    background-color: ${(props) => props.theme.backgroundColorPost} !important;
+    color: ${(props) => props.theme.colorTextInfo};
     &-affix-wrapper {
-      background-color: ${props => props.theme.colorPrimary} !important;
+      background-color: ${(props) => props.theme.colorPrimary} !important;
     }
   }
-
   .ant-form-item-label {
     label {
-      color: ${props => props.theme.colorPrimary};
+      color: ${(props) => props.theme.colorPrimary};
     }
   }
-
-  input:-webkit-autofill{
-    -webkit-text-fill-color: ${props => props.theme.colorTextInfo};
-    background-color: ${props => props.theme.colorTextInfo} !important;
+  input:-webkit-autofill {
+    -webkit-text-fill-color: ${(props) => props.theme.colorTextInfo};
+    background-color: ${(props) => props.theme.colorTextInfo} !important;
     transition: background-color 5000s ease-in-out 0s;
-    box-shadow: inset 0 0 20px 20px ${props => props.theme.backgroundColorPost};
-}
+    box-shadow: inset 0 0 20px 20px
+      ${(props) => props.theme.backgroundColorPost};
+  }
 `;
 export default NewUserStyled;

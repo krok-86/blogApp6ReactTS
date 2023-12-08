@@ -6,11 +6,11 @@ import { fetchAuth, fetchReg } from "../../redux/slices/auth";
 import { FC } from "react";
 import { useAppDispatch } from "../../hook";
 import { IRegistrationForm } from "../../types";
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input } from "antd";
 import { LeftOutlined } from "@ant-design/icons";
 
 interface INewUser {
-  isRegistration: boolean,
+  isRegistration: boolean;
 }
 type FieldType = {
   name?: string;
@@ -19,12 +19,12 @@ type FieldType = {
   remember?: string;
 };
 
-const NewUser: FC <INewUser> = ({ isRegistration }) => {
+const NewUser: FC<INewUser> = ({ isRegistration }) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  
+
   const submitForm = async (value: IRegistrationForm) => {
-    console.log('Success:', value);
+    console.log("Success:", value);
     try {
       if (isRegistration) {
         const data = await dispatch(fetchReg(value)).unwrap();
@@ -48,82 +48,87 @@ const NewUser: FC <INewUser> = ({ isRegistration }) => {
       errorToast(err.data);
     }
   };
-    
+
   const title = isRegistration ? "Registration" : "Authorization";
 
   const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
+    console.log("Failed:", errorInfo);
   };
 
-  const changedLink = isRegistration ? <Link to="/auth" className="form-go-back">
-  <LeftOutlined />
-    Have account? Go to log in
-      </Link> : <Link to="/registration" className="form-go-back">
-  <LeftOutlined />
-    Have not account? Go to sign up
-      </Link>;
-  
+  const changedLink = isRegistration ? (
+    <Link to="/auth" className="form-go-back">
+      <LeftOutlined />
+      Have account? Go to log in
+    </Link>
+  ) : (
+    <Link to="/registration" className="form-go-back">
+      <LeftOutlined />
+      Have not account? Go to sign up
+    </Link>
+  );
+
   return (
-<NewUserStyled>
-    <div className= "user-text-wrap">
-    <div className= "user-header-wrap">
-      <div className="user-text">{title}</div>
-    </div>      
-<Form
-    name="basic"
-    labelCol={{ span: 8 }}
-    wrapperCol={{ span: 16 }}
-    style={{ maxWidth: 600 }}
-    initialValues={{ remember: true }}
-    onFinish={submitForm}
-    onFinishFailed={onFinishFailed}
-    autoComplete="off"
-    
-  >
-    {isRegistration && (
-    <Form.Item<FieldType>         
-      label="Username"      
-      name="name"
-      rules={[{ required: true, message: 'Please input your username!' }]}
-    >
-      <Input />
-    </Form.Item>
-    )}
-    <Form.Item<FieldType>       
-      label="Email"
-      name={'email'}
-      rules={[{ required: true, message: 'Please input your email!' }]}
-    >
-      <Input />
-    </Form.Item>
-    <Form.Item<FieldType> 
-    className="newUser-text"
-      label="Password"
-      name="password"
-      rules={[{ required: true, message: 'Please input your password!' }]}
-    >
-      <Input.Password />
-    </Form.Item>
-    <div className = "button-wrap">
-    <Form.Item >
-      <Button className="user-button" type="primary" htmlType="submit">
-        Submit
-      </Button>
-    </Form.Item>
-    <Form.Item>
-      <Button className="user-button" type="primary" htmlType="reset">
-        Reset
-      </Button>
-    </Form.Item>    
-    </div>
-  </Form>
-  </div>
-  {changedLink}
-  <Link to="/" className="form-go-back form-go-back__grey">
-  <LeftOutlined />
-    Go back to posts list
-      </Link> 
-  </NewUserStyled>   
+    <NewUserStyled>
+      <div className="user-text-wrap">
+        <div className="user-header-wrap">
+          <div className="user-text">{title}</div>
+        </div>
+        <Form
+          name="basic"
+          labelCol={{ span: 8 }}
+          wrapperCol={{ span: 16 }}
+          style={{ maxWidth: 600 }}
+          initialValues={{ remember: true }}
+          onFinish={submitForm}
+          onFinishFailed={onFinishFailed}
+          autoComplete="off"
+        >
+          {isRegistration && (
+            <Form.Item<FieldType>
+              label="Username"
+              name="name"
+              rules={[
+                { required: true, message: "Please input your username!" },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+          )}
+          <Form.Item<FieldType>
+            label="Email"
+            name={"email"}
+            rules={[{ required: true, message: "Please input your email!" }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item<FieldType>
+            className="newUser-text"
+            label="Password"
+            name="password"
+            rules={[{ required: true, message: "Please input your password!" }]}
+          >
+            <Input.Password />
+          </Form.Item>
+          <div className="button-wrap">
+            <Form.Item>
+              <Button className="user-button" type="primary" htmlType="submit">
+                Submit
+              </Button>
+            </Form.Item>
+            <Form.Item>
+              <Button className="user-button" type="primary" htmlType="reset">
+                Reset
+              </Button>
+            </Form.Item>
+          </div>
+        </Form>
+      </div>
+      {changedLink}
+      <Link to="/" className="form-go-back form-go-back__grey">
+        <LeftOutlined />
+        Go back to posts list
+      </Link>
+    </NewUserStyled>
   );
 };
 export default NewUser;

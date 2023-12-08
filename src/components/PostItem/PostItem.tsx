@@ -1,24 +1,24 @@
 import PostItemStyled from "./PostItemStyled";
 import { format } from "date-fns";
 import { enGB } from "date-fns/esm/locale";
-// import Button from "../Buttons/Button";
 import { Link } from "react-router-dom";
 import { FC } from "react";
 import { IRegistrationForm, Post } from "../../types";
 import { Button } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 
-
 interface IPostItem {
-  post: Post,
-  userData: IRegistrationForm | null,
+  post: Post;
+  userData: IRegistrationForm | null;
   handleClick?: () => void;
 }
 
-const PostItem: FC <IPostItem> = ({ post, handleClick }) => {
-  const date = post.createdAt && format(new Date(post.createdAt), "MMM d, yyyy", {
-    locale: enGB,
-  });
+const PostItem: FC<IPostItem> = ({ post, handleClick }) => {
+  const date =
+    post.createdAt &&
+    format(new Date(post.createdAt), "MMM d, yyyy", {
+      locale: enGB,
+    });
 
   return (
     <PostItemStyled>
@@ -37,9 +37,9 @@ const PostItem: FC <IPostItem> = ({ post, handleClick }) => {
           </div>
           <div>Author {post?.user?.name}</div>
           <>
-            <DeleteOutlined onClick={handleClick} className="post-icon"/>
+            <DeleteOutlined onClick={handleClick} className="post-icon" />
             <Link to={`/postEdit/${post.id}`}>
-              <EditOutlined className="post-icon"/>
+              <EditOutlined className="post-icon" />
             </Link>
           </>
         </div>

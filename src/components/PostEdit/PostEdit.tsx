@@ -9,10 +9,9 @@ import { getPostById } from "../../api/postApi";
 import { sendUpdatedPost } from "../../redux/slices/posts";
 import { useAppDispatch, useAppSelector } from "../../hook";
 import { Post } from "../../types";
-import { Badge, Button, Form} from 'antd';
+import { Badge, Button, Form } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { LeftOutlined } from "@ant-design/icons";
-
 
 const PostEdit = () => {
   const userData = useAppSelector((state) => state.auth.data);
@@ -23,7 +22,7 @@ const PostEdit = () => {
 
   console.log(userData?.id);
   console.log(postData.user?.id);
-  
+
   useEffect(() => {
     const fetchDataId = async () => {
       if (!id) return;
@@ -65,7 +64,7 @@ const PostEdit = () => {
     postData?.createdAt &&
     format(new Date(postData.createdAt), "MMM d, yyyy", { locale: enGB });
 
-console.log(postData?.topics)
+  console.log(postData?.topics);
 
   return (
     <PostEditStyled>
@@ -80,18 +79,17 @@ console.log(postData?.topics)
             <div className="post-head-global">Edit post</div>
           </div>
         </div>
-        <div className="post-info">created {date} by {postData.user?.name} </div>
+        <div className="post-info">
+          created {date} by {postData.user?.name}{" "}
+        </div>
         <div className="post-badges">
-        {postData?.topics?.map((item) => ( <div className="post-badge" key={item.id}>
-        <Badge 
-        className="post-badge"
-        count={item?.title}
-        // style={{ backgroundColor: '#1677ff' }}
-      />
-      </div>
-                ))}
-                </div>
-        <div className="post-body">          
+          {postData?.topics?.map((item) => (
+            <div className="post-badge" key={item.id}>
+              <Badge className="post-badge" count={item?.title} />
+            </div>
+          ))}
+        </div>
+        <div className="post-body">
           <Form.Item>
             <TextArea
               className="post-textArea"
@@ -101,13 +99,15 @@ console.log(postData?.topics)
               onChange={updatePost}
               placeholder="Add new post"
             />
-          </Form.Item>         
-          <div className="post-button-wrap">            
-            <Form.Item>              
-              <Button className="post-color-text" 
-              type="primary"
-              onClick={sendPost}
-              htmlType="submit">
+          </Form.Item>
+          <div className="post-button-wrap">
+            <Form.Item>
+              <Button
+                className="post-color-text"
+                type="primary"
+                onClick={sendPost}
+                htmlType="submit"
+              >
                 Save
               </Button>
             </Form.Item>

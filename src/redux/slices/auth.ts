@@ -1,33 +1,37 @@
-import { IRegistrationForm, IRegistrationFormData, IRejectValue } from "./../../types";
+import {
+  IRegistrationForm,
+  IRegistrationFormData,
+  IRejectValue,
+} from "./../../types";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { postUserAuth, getUserAuthMe, postUserReg } from "../../api/postApi";
 import { RootState } from "../store";
 
-export const fetchReg = createAsyncThunk<IRegistrationFormData,
-IRegistrationForm, {rejectValue: IRejectValue}>(
-  "registration/fetchReg",
-  async (params, { rejectWithValue }) => {
-    try {
-      const { data } = await postUserReg(params);
-      return data;
-    } catch (err: any) {
-      return rejectWithValue({ data: err.response.data.message });
-    }
+export const fetchReg = createAsyncThunk<
+  IRegistrationFormData,
+  IRegistrationForm,
+  { rejectValue: IRejectValue }
+>("registration/fetchReg", async (params, { rejectWithValue }) => {
+  try {
+    const { data } = await postUserReg(params);
+    return data;
+  } catch (err: any) {
+    return rejectWithValue({ data: err.response.data.message });
   }
-);
+});
 
-export const fetchAuth = createAsyncThunk<IRegistrationFormData,
-IRegistrationForm, {rejectValue: IRejectValue}>(
-  "authorization/fetchAuth",
-  async (params, { rejectWithValue }) => {
-    try {
-      const { data } = await postUserAuth(params);
-      return data;
-    } catch (err: any) {
-      return rejectWithValue({ data: err.response.data.message });
-    }
+export const fetchAuth = createAsyncThunk<
+  IRegistrationFormData,
+  IRegistrationForm,
+  { rejectValue: IRejectValue }
+>("authorization/fetchAuth", async (params, { rejectWithValue }) => {
+  try {
+    const { data } = await postUserAuth(params);
+    return data;
+  } catch (err: any) {
+    return rejectWithValue({ data: err.response.data.message });
   }
-);
+});
 
 export const fetchAuthMe = createAsyncThunk(
   "authorization/fetchAuthMe",
@@ -38,9 +42,9 @@ export const fetchAuthMe = createAsyncThunk(
 );
 
 type initialAuthState = {
-  data: IRegistrationForm | null,
-  status: "loading" | "loaded" | "error"
-}
+  data: IRegistrationForm | null;
+  status: "loading" | "loaded" | "error";
+};
 
 const initialState: initialAuthState = {
   data: null,
@@ -100,4 +104,3 @@ export const selectIsAuth = (state: RootState) => Boolean(state.auth.data);
 export const authReducer = authSlice.reducer;
 
 export const { logout } = authSlice.actions;
-

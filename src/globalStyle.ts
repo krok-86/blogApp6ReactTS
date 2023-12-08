@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
   html, body {
@@ -7,12 +7,12 @@ export const GlobalStyle = createGlobalStyle`
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: ${props => props.theme.backgroundColor};
+  /* background-color: ${(props) => props.theme.backgroundColor}; */
   color: black;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url(${(props)=>props.theme.backgroundImg});
+  background-image: url(${(props) => props.theme.backgroundImg});
   }
 
   code {
@@ -26,8 +26,8 @@ export const GlobalStyle = createGlobalStyle`
   width: 350px;
   height: 100%;
   border-radius: 10px;
-  border: ${props => props.theme.borderPosts};
-  background-color: ${props => props.theme.backgroundColorPosts};
+  border: ${(props) => props.theme.borderPosts};
+  background-color: ${(props) => props.theme.backgroundColorPosts};
   -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
   -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
   box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
@@ -42,7 +42,7 @@ export const GlobalStyle = createGlobalStyle`
     font-weight: 900;
     padding: 5px;
     margin: 5px;
-    color: ${props => props.theme.colorPrimary};
+    color: ${(props) => props.theme.colorPrimary};
 }
 
 .post-body {
@@ -58,8 +58,8 @@ export const GlobalStyle = createGlobalStyle`
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;  
-  background-color: ${props => props.theme.backgroundColorPost};
-  color: ${props => props.theme.colorTextPost};
+  background-color: ${(props) => props.theme.backgroundColorPost};
+  color: ${(props) => props.theme.colorTextPost};
   background-clip: padding-box;
   border: none;
   border-radius: 0.25rem;
@@ -67,7 +67,7 @@ export const GlobalStyle = createGlobalStyle`
   resize: vertical;
   &__wrapper {
     height: fit-content;
-    background-color: ${props => props.theme.backgroundColorPost};
+    background-color: ${(props) => props.theme.backgroundColorPost};
   }
 }
 
@@ -92,7 +92,7 @@ export const GlobalStyle = createGlobalStyle`
 }
 
 .ant-badge-count {
-  background-color: ${props => props.theme.colorTextInfo} !important;
+  background-color: ${(props) => props.theme.colorTextInfo} !important;
 }
 
 @media (min-width: 768px) {

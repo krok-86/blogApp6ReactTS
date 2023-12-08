@@ -68,16 +68,18 @@ const Posts = () => {
                 </Button>
               </Link>
               {isAuth && (
-                <Button onClick={onClickLogOut}
-                className="post-logOut-button danger"
-                type="primary">
+                <Button
+                  onClick={onClickLogOut}
+                  className="post-logOut-button danger"
+                  type="primary"
+                >
                   <LogoutOutlined /> Log out
                 </Button>
               )}
             </div>
           </div>
 
-          <Flex gap="middle" vertical>            
+          <Flex gap="middle" vertical>
             {posts.map((obj) => (
               <PostItem
                 key={obj.id}
