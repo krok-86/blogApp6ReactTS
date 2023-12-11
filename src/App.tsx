@@ -14,7 +14,7 @@ import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "./globalStyle";
 import { theme } from "./theme";
 
-declare module "styled-components" {};//???
+declare module "styled-components" {};
 
 const App: FC = () => {
   const dispatch = useAppDispatch();
@@ -35,7 +35,7 @@ const App: FC = () => {
     localStorage.setItem("mode", JSON.stringify(newTheme));
     return newTheme;
   };
-  useEffect(() => {
+  useEffect(() => {//fix
     dispatch(fetchAuthMe());
     navigate(JSON.parse(window.sessionStorage.getItem("lastRoute") || "{}"));
     window.onbeforeunload = () => {

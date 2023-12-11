@@ -1,10 +1,10 @@
-import { useEffect } from "react";
+import { FC, useEffect } from "react";
 import PostsStyled from "./PostsStyled";
 import { Link } from "react-router-dom";
 import { successToast, errorToast } from "../../utils/toasts/toasts";
 import PostItem from "../PostItem/PostItem";
 import { fetchPosts, fetchRemovePost } from "../../redux/slices/posts";
-import { logout, selectIsAuth } from "../../redux/slices/auth";
+import { logout} from "../../redux/slices/auth";
 import { useAppDispatch, useAppSelector } from "../../hook";
 import { Flex } from "antd";
 import { Button } from "antd";
@@ -14,12 +14,12 @@ import {
   LogoutOutlined,
 } from "@ant-design/icons";
 
-const Posts = () => {
+const Posts: FC = () => {
   const dispatch = useAppDispatch();
 
   const { posts } = useAppSelector((state) => state.posts);
   const userData = useAppSelector((state) => state.auth.data);
-  const isAuth = useAppSelector(selectIsAuth);
+  const isAuth = useAppSelector((state) => state.auth.data);//fix
 
   const onClickLogOut = () => {
     if (window.confirm("Do you really want to go out?")) {
@@ -37,7 +37,7 @@ const Posts = () => {
       await dispatch(fetchRemovePost(id)).unwrap();
       successToast("Post is deleted");
     } catch (err: any) {
-      console.log(">>>>>>>>>>>>>>>>", err);
+      console.log("deletePost", err);
       errorToast(err.data);
     }
   };
@@ -62,8 +62,7 @@ const Posts = () => {
                 </Button>
               </Link>
               <Link to={!isAuth ? "/registration" : "#"}>
-                <Button className="post-add-button" type="primary">
-                  {/* {" "} */}
+                <Button className="post-add-button" type="primary">                  
                   {isAuth ? userData?.email : "Sign up"}
                 </Button>
               </Link>
@@ -85,7 +84,7 @@ const Posts = () => {
                 key={obj.id}
                 post={obj}
                 userData={userData}
-                handleClick={() => deletePost(obj.id.toString())}
+                handleClick={() => obj?.id && deletePost(obj.id.toString())}
               />
             ))}
           </Flex>

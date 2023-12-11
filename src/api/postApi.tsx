@@ -12,7 +12,7 @@ const userAuthMeUrl = '/users/authorization/me';
 //post block
 
 export const getPostById = async (id: string) => {
-    return await axiosInstance.get(`${postUrl}/${id}`)//why {params: id}?
+    return await axiosInstance.get(`${postUrl}/${id}`)//type
 }
 
 export const putPostById = (params: IEditPost) => {

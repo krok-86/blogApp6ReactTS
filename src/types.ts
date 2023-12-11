@@ -28,7 +28,7 @@ export type TopicType = {
 };
 
 export type Post = {
-  id: number;
+  id?: number;
   post?: string;
   postText?: string;
   userId?: number | string;

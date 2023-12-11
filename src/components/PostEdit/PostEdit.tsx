@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import PostEditStyled from "./PostEditStyled";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -8,30 +8,31 @@ import { enGB } from "date-fns/locale";
 import { getPostById } from "../../api/postApi";
 import { sendUpdatedPost } from "../../redux/slices/posts";
 import { useAppDispatch, useAppSelector } from "../../hook";
-import { Post } from "../../types";
+import { Post, PostData } from "../../types";
 import { Badge, Button, Form } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { LeftOutlined } from "@ant-design/icons";
 
-const PostEdit = () => {
+const PostEdit: FC = () => {
   const userData = useAppSelector((state) => state.auth.data);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
-  const [postData, setPostData] = useState({} as Post);
-
-  console.log(userData?.id);
-  console.log(postData.user?.id);
+  const [postData, setPostData] = useState<Post>();
+  
+  // console.log(userData?.id);
+  // console.log(postData?.user?.id);
 
   useEffect(() => {
     const fetchDataId = async () => {
       if (!id) return;
       try {
         const result = await getPostById(id);
+        console.log(result.data)
         setPostData(result.data);
       } catch (err: any) {
         errorToast(err.response.data.message);
-        console.log(">>>>>>", err);
+        console.log("getPostById", err);
       }
     };
     fetchDataId();
@@ -39,11 +40,10 @@ const PostEdit = () => {
 
   const updatePost = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     try {
-      const newPost = { ...postData, post: event.target?.value };
-      console.log(postData);
+      const newPost = { ...postData, post: event.target?.value };//type?
       setPostData(newPost);
     } catch (err) {
-      console.log(">>>>>>>>>>>>>>>>", err);
+      console.log("updatePost", err);
     }
   };
 
@@ -51,7 +51,7 @@ const PostEdit = () => {
     if (!id) return;
     try {
       await dispatch(
-        sendUpdatedPost({ id, postText: postData.post || "" })
+        sendUpdatedPost({ id, postText: postData?.post || "" })
       ).unwrap();
       successToast("The post has been edited");
       navigate("/");
@@ -80,7 +80,7 @@ const PostEdit = () => {
           </div>
         </div>
         <div className="post-info">
-          created {date} by {postData.user?.name}{" "}
+          created {date} by {postData?.user?.name}{" "}
         </div>
         <div className="post-badges">
           {postData?.topics?.map((item) => (
@@ -94,8 +94,8 @@ const PostEdit = () => {
             <TextArea
               className="post-textArea"
               rows={4}
-              readOnly={postData.user?.id !== userData?.id}
-              value={postData.post}
+              readOnly={postData?.user?.id !== userData?.id}
+              value={postData?.post}
               onChange={updatePost}
               placeholder="Add new post"
             />

@@ -6,7 +6,7 @@ const NewPostStyled = styled.div`
   align-items: center;
   padding-top: 10rem;
 
-  .user-head {
+  /* .user-head {
     display: flex;
   }
   .post-wrap {
@@ -23,7 +23,7 @@ const NewPostStyled = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-  }
+  } */
 
   ::placeholder {
     color: ${(props) => props.theme.colorTextPlaceHolder};

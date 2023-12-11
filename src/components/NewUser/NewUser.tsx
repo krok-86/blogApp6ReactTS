@@ -28,8 +28,8 @@ const NewUser: FC<INewUser> = ({ isRegistration }) => {
     try {
       if (isRegistration) {
         const data = await dispatch(fetchReg(value)).unwrap();
-        if ("token" in data && data.token) {
-          window.localStorage.setItem("token", data.token);
+        if ( data.token) {
+          window.localStorage.setItem("token", data.token);// add utils
         }
         successToast("User is created");
         navigate("/");
@@ -55,7 +55,7 @@ const NewUser: FC<INewUser> = ({ isRegistration }) => {
     console.log("Failed:", errorInfo);
   };
 
-  const changedLink = isRegistration ? (
+  const changedLink = isRegistration ? (//fix 
     <Link to="/auth" className="form-go-back">
       <LeftOutlined />
       Have account? Go to log in
