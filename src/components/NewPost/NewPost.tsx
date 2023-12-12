@@ -17,7 +17,7 @@ import NewPostHead from "./NewPostHead/NewPostHead";
 
 import { Post, SelectorType } from "../../types";
 
-import { clearButton, saveButton } from "../../constants";
+import { clearButton, SAVE_BUTTON } from "../../constants";
 
 type TopicDataType = SelectorType | null;
 
@@ -121,7 +121,7 @@ const NewPost: FC = () => {
                 className="post-save-button"
                 htmlType="submit"
               >
-                {saveButton}
+                {SAVE_BUTTON}
               </Button>
               <Button
                 className="post-save-button"

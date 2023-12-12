@@ -18,7 +18,7 @@ import { getPostById } from "../../api/postApi";
 
 import { sendUpdatedPost } from "../../redux/slices/posts";
 
-import { saveButton } from "../../constants";
+import { SAVE_BUTTON } from "../../constants";
 
 import PostEditHead from "./PostEditHead/PostEditHead";
 
@@ -94,7 +94,7 @@ const PostEdit: FC = () => {
                 onClick={sendPost}
                 htmlType="submit"
               >
-                {saveButton}
+                {SAVE_BUTTON}
               </Button>
             </Form.Item>
           </div>

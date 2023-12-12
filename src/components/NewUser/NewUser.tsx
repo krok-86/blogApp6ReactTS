@@ -21,6 +21,7 @@ import {
   goLogIn,
   goSignUp,
   submitButton,
+  URLS,
 } from "../../constants";
 
 interface INewUser {
@@ -121,7 +122,7 @@ const NewUser: FC<INewUser> = ({ isRegistration }) => {
         </Form>
       </div>
       {isRegistration ? (
-        <Link to="/auth" className="form-go-back">
+        <Link to={URLS.AUTH} className="form-go-back">
           <LeftOutlined />
           {goLogIn}
         </Link>

@@ -3,7 +3,7 @@ import {
   IRegistrationFormData,
   IRejectValue,
 } from "./../../types";
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, isAnyOf } from "@reduxjs/toolkit";
 import { postUserAuth, getUserAuthMe, postUserReg } from "../../api/postApi";
 import { RootState } from "../store";
 
@@ -60,42 +60,72 @@ const authSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchReg.pending, (state) => {
-      state.status = "loading";
-      state.data = null;
-    });
-    builder.addCase(fetchReg.fulfilled, (state, action) => {
-      state.status = "loaded";
-      state.data = action.payload.userData;
-    });
-    builder.addCase(fetchReg.rejected, (state) => {
-      state.status = "error";
-      state.data = null;
-    });
-    builder.addCase(fetchAuth.pending, (state) => {
-      state.status = "loading";
-      state.data = null;
-    });
-    builder.addCase(fetchAuth.fulfilled, (state, action) => {
-      state.status = "loaded";
-      state.data = action.payload.userData;
-    });
-    builder.addCase(fetchAuth.rejected, (state) => {
-      state.status = "error";
-      state.data = null;
-    });
-    builder.addCase(fetchAuthMe.pending, (state) => {
-      state.status = "loading";
-      state.data = null;
-    });
     builder.addCase(fetchAuthMe.fulfilled, (state, action) => {
       state.status = "loaded";
       state.data = action.payload;
     });
-    builder.addCase(fetchAuthMe.rejected, (state) => {
-      state.status = "error";
-      state.data = null;
-    });
+    builder
+    .addMatcher(
+      isAnyOf(fetchReg.pending, fetchAuth.pending, fetchAuthMe.pending),
+      (state) => {
+        state.status = "loading";
+        state.data = null;
+      }
+    );
+    builder
+    .addMatcher(
+      isAnyOf(fetchReg.rejected, fetchAuth.rejected, fetchAuthMe.rejected),
+      (state) => {
+        state.status = "error";
+        state.data = null;
+      }
+    );
+    builder
+    .addMatcher(
+      isAnyOf(fetchReg.fulfilled, fetchAuth.fulfilled),
+      (state, action) => {
+        state.status = "loaded";
+        state.data = action.payload.userData;
+      }
+    );
+
+
+    // builder.addCase(fetchReg.pending, (state) => {
+    //   state.status = "loading";
+    //   state.data = null;
+    // });
+    // builder.addCase(fetchReg.fulfilled, (state, action) => {
+    //   state.status = "loaded";
+    //   state.data = action.payload.userData;
+    // });
+    // builder.addCase(fetchReg.rejected, (state) => {
+    //   state.status = "error";
+    //   state.data = null;
+    // });
+    // builder.addCase(fetchAuth.pending, (state) => {
+    //   state.status = "loading";
+    //   state.data = null;
+    // });
+    // builder.addCase(fetchAuth.fulfilled, (state, action) => {
+    //   state.status = "loaded";
+    //   state.data = action.payload.userData;
+    // });
+    // builder.addCase(fetchAuth.rejected, (state) => {
+    //   state.status = "error";
+    //   state.data = null;
+    // });
+    // builder.addCase(fetchAuthMe.pending, (state) => {
+    //   state.status = "loading";
+    //   state.data = null;
+    // });
+    // builder.addCase(fetchAuthMe.fulfilled, (state, action) => {
+    //   state.status = "loaded";
+    //   state.data = action.payload;
+    // });
+    // builder.addCase(fetchAuthMe.rejected, (state) => {
+    //   state.status = "error";
+    //   state.data = null;
+    // });
   },
 });
 

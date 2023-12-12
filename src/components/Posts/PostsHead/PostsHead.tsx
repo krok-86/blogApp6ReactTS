@@ -1,17 +1,17 @@
 import { Link } from "react-router-dom";
-import PostsHeadStyled from "./PostsHeadStyled";
+import PostsHeadStyled from "./PostsHead.styled";
 import { Button } from "antd";
 import { AppstoreAddOutlined, LoginOutlined, LogoutOutlined } from "@ant-design/icons";
 import { FC } from "react";
 import { IRegistrationForm } from "../../../types";
 
-type Posts = {
-  isAuth?: IRegistrationForm,
-  userData?: IRegistrationForm,
+type PostsHeadType = {
+  isAuth: IRegistrationForm | null,
+  userData: IRegistrationForm | null,
   onClickLogOut?: () => void,
 }
 
-const PostsHead:FC<Posts> = ({isAuth, userData, onClickLogOut}) => {
+const PostsHead:FC<PostsHeadType> = ({isAuth, userData, onClickLogOut}) => {
   return (
   <PostsHeadStyled>
  <div className="post-button-area">
@@ -34,7 +34,7 @@ const PostsHead:FC<Posts> = ({isAuth, userData, onClickLogOut}) => {
                 <Button className="post-add-button" type="primary">                  
                   Sign up
                 </Button>
-              </Link> : <div className="post-user-data"> userData?.email </div>
+              </Link> : <div className="post-user-data">{userData?.email}</div>
               }
               {isAuth && (
                 <Button
