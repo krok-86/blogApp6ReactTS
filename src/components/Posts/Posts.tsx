@@ -1,11 +1,17 @@
-import { FC, useEffect } from "react";
 import PostsStyled from "./PostsStyled";
+
+import { FC, useEffect } from "react";
+
 import { Link } from "react-router-dom";
+
 import { successToast, errorToast } from "../../utils/toasts/toasts";
+import { useAppDispatch, useAppSelector } from "../../hook";
+
 import PostItem from "../PostItem/PostItem";
+
 import { fetchPosts, fetchRemovePost } from "../../redux/slices/posts";
 import { logout} from "../../redux/slices/auth";
-import { useAppDispatch, useAppSelector } from "../../hook";
+
 import { Flex } from "antd";
 import { Button } from "antd";
 import {
@@ -13,24 +19,25 @@ import {
   LoginOutlined,
   LogoutOutlined,
 } from "@ant-design/icons";
+import PostsHead from "./PostsHead/PostsHead";
+import { IRegistrationForm } from "../../types";
 
 const Posts: FC = () => {
-  const dispatch = useAppDispatch();
-
   const { posts } = useAppSelector((state) => state.posts);
   const userData = useAppSelector((state) => state.auth.data);
-  const isAuth = useAppSelector((state) => state.auth.data);//fix
-
-  const onClickLogOut = () => {
-    if (window.confirm("Do you really want to go out?")) {
-      dispatch(logout());
-      window.localStorage.removeItem("token");
-    }
-  };
+  const isAuth = useAppSelector((state<IRegistrationForm>) => state.auth.data);//fix
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(fetchPosts());
   }, []);
+
+  const onClickLogOut = () => {
+    if (window.confirm("Do you really want to go out?")) {
+      dispatch(logout());
+      window.localStorage.removeItem("token");//fix
+    }
+  };  
 
   const deletePost = async (id: string) => {
     try {
@@ -45,27 +52,34 @@ const Posts: FC = () => {
   return (
     <PostsStyled>
       <div className="posts-area">
-        <div className="posts-head">Posts:</div>
+        <div className="posts-head">Posts:</div>//fix
         <div className="post-body">
-          <div>
-            <div className="post-button-area">
-              <Link to="/createPost">
+         <PostsHead
+         isAuth = {isAuth}
+         userData = {userData}        
+         onClickLogOut = {onClickLogOut}
+         />
+        {/* <Link to="/createPost">
                 <Button className="post-add-button" type="primary">
                   <AppstoreAddOutlined />
                   Add new post
                 </Button>
-              </Link>
-              <Link to={!isAuth ? "/auth" : "#"}>
+              </Link>              
+              {!isAuth  ? 
+              <Link to="/auth">              
                 <Button className="post-add-button" type="primary">
                   <LoginOutlined />
-                  {isAuth ? userData?.name : "Log in"}
-                </Button>
-              </Link>
-              <Link to={!isAuth ? "/registration" : "#"}>
+                  Log in
+                </Button>                 
+              </Link> : <div className="post-user-data"> {userData?.name} </div>
+              }
+              {!isAuth  ?
+              <Link to="/registration">
                 <Button className="post-add-button" type="primary">                  
-                  {isAuth ? userData?.email : "Sign up"}
+                  Sign up
                 </Button>
-              </Link>
+              </Link> : <div className="post-user-data"> {userData?.email} </div>
+              }
               {isAuth && (
                 <Button
                   onClick={onClickLogOut}
@@ -75,9 +89,8 @@ const Posts: FC = () => {
                   <LogoutOutlined /> Log out
                 </Button>
               )}
-            </div>
-          </div>
-
+            </div> */}
+         
           <Flex gap="middle" vertical>
             {posts.map((obj) => (
               <PostItem

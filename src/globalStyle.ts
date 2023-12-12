@@ -7,12 +7,12 @@ export const GlobalStyle = createGlobalStyle`
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* background-color: ${(props) => props.theme.backgroundColor}; */
+  background-color: ${(props) => props.theme.backgroundColor};
   color: black;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url(${(props) => props.theme.backgroundImg});
+  /* background-image: url(${(props) => props.theme.backgroundImg}); */
   }
 
   code {

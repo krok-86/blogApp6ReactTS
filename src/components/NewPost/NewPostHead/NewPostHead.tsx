@@ -2,7 +2,7 @@ import { FC } from "react";
 import NewPostHeadStyled from "./NewPostHeadStyled";
 import { Link } from "react-router-dom";
 import { LeftOutlined } from "@ant-design/icons";
-import { newPost } from "../../../constants";
+import { newPostTitle } from "../../../constants";
 
 const NewPostHead:FC = () => {//need fix?
     return (
@@ -14,7 +14,7 @@ const NewPostHead:FC = () => {//need fix?
             </Link>
           </div>
           <div className="user-text-wrap">
-            <div className="post-head-global">{newPost}</div>
+            <div className="post-head-global">{newPostTitle}</div>
           </div>
         </div>
 </NewPostHeadStyled>

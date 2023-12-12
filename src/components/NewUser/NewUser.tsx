@@ -1,13 +1,27 @@
 import NewUserStyled from "./NewUserStyled";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { successToast, errorToast } from "../../utils/toasts/toasts";
-import { fetchAuth, fetchReg } from "../../redux/slices/auth";
-import { FC } from "react";
-import { useAppDispatch } from "../../hook";
-import { IRegistrationForm } from "../../types";
+
 import { Button, Form, Input } from "antd";
 import { LeftOutlined } from "@ant-design/icons";
+
+import { Link } from "react-router-dom";
+
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../hook";
+
+import { successToast, errorToast } from "../../utils/toasts/toasts";
+
+import { fetchAuth, fetchReg } from "../../redux/slices/auth";
+
+import { FC } from "react";
+import { IRegistrationForm } from "../../types";
+
+import {
+  clearButton,
+  goBackButton,
+  goLogIn,
+  goSignUp,
+  submitButton,
+} from "../../constants";
 
 interface INewUser {
   isRegistration: boolean;
@@ -23,19 +37,21 @@ const NewUser: FC<INewUser> = ({ isRegistration }) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
+  const title = isRegistration ? "Registration" : "Authorization";
+
   const submitForm = async (value: IRegistrationForm) => {
-    console.log("Success:", value);
     try {
       if (isRegistration) {
         const data = await dispatch(fetchReg(value)).unwrap();
-        if ( data.token) {
-          window.localStorage.setItem("token", data.token);// add utils
+        if (data.token) {
+          window.localStorage.setItem("token", data.token); // add utils
         }
         successToast("User is created");
         navigate("/");
       } else {
         const data = await dispatch(fetchAuth(value)).unwrap();
         if ("token" in data && data.token) {
+          //fix?         
           window.localStorage.setItem("token", data.token);
           successToast("User is authorized");
           navigate("/");
@@ -48,24 +64,6 @@ const NewUser: FC<INewUser> = ({ isRegistration }) => {
       errorToast(err.data);
     }
   };
-
-  const title = isRegistration ? "Registration" : "Authorization";
-
-  const onFinishFailed = (errorInfo: any) => {
-    console.log("Failed:", errorInfo);
-  };
-
-  const changedLink = isRegistration ? (//fix 
-    <Link to="/auth" className="form-go-back">
-      <LeftOutlined />
-      Have account? Go to log in
-    </Link>
-  ) : (
-    <Link to="/registration" className="form-go-back">
-      <LeftOutlined />
-      Have not account? Go to sign up
-    </Link>
-  );
 
   return (
     <NewUserStyled>
@@ -80,7 +78,6 @@ const NewUser: FC<INewUser> = ({ isRegistration }) => {
           style={{ maxWidth: 600 }}
           initialValues={{ remember: true }}
           onFinish={submitForm}
-          onFinishFailed={onFinishFailed}
           autoComplete="off"
         >
           {isRegistration && (
@@ -112,21 +109,31 @@ const NewUser: FC<INewUser> = ({ isRegistration }) => {
           <div className="button-wrap">
             <Form.Item>
               <Button className="user-button" type="primary" htmlType="submit">
-                Submit
+                {submitButton}
               </Button>
             </Form.Item>
             <Form.Item>
               <Button className="user-button" type="primary" htmlType="reset">
-                Reset
+                {clearButton}
               </Button>
             </Form.Item>
           </div>
         </Form>
       </div>
-      {changedLink}
+      {isRegistration ? (
+        <Link to="/auth" className="form-go-back">
+          <LeftOutlined />
+          {goLogIn}
+        </Link>
+      ) : (
+        <Link to="/registration" className="form-go-back">
+          <LeftOutlined />
+          {goSignUp}
+        </Link>
+      )}
       <Link to="/" className="form-go-back form-go-back__grey">
         <LeftOutlined />
-        Go back to posts list
+        {goBackButton}
       </Link>
     </NewUserStyled>
   );

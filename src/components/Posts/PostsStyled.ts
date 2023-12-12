@@ -33,6 +33,11 @@ const PostsStyled = styled.div`
   .post-add-button {
     color: ${(props) => props.theme.colorText};
   }
+  .post-user-data {
+    display: flex;
+    align-items: center;
+    color: ${(props) => props.theme.colorPrimary};
+  }
   .post-logOut-button {
     color: ${(props) => props.theme.colorText};
   }

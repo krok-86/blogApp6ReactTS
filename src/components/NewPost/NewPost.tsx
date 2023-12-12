@@ -5,17 +5,19 @@ import { Button } from "antd";
 import { useForm } from "react-hook-form";
 import Select from "react-select";
 
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FC, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hook";
 
 import { successToast, errorToast } from "../../utils/toasts/toasts";
+
 import { getTopics } from "../../api/postApi";
 import { addPost } from "../../redux/slices/posts";
-
-import { Post, SelectorType } from "../../types";
 import NewPostHead from "./NewPostHead/NewPostHead";
 
+import { Post, SelectorType } from "../../types";
+
+import { clearButton, saveButton } from "../../constants";
 
 type TopicDataType = SelectorType | null;
 
@@ -23,33 +25,34 @@ interface ITopicTitle {
   [label: string]: string;
   [value: number]: string;
 }
-const NewPost:FC = () => {//need fix?
-  const userData = useAppSelector((state) => state.auth.data); 
+const NewPost: FC = () => {
+  //need fix?
+  const userData = useAppSelector((state) => state.auth.data);
   const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
 
-  const [topics, setTopics] = useState([]); 
+  const [topics, setTopics] = useState([]);
   const [topicData, setTopicData] = useState<TopicDataType>(null);
-  
+
   const { register, handleSubmit, reset } = useForm({
-    defaultValues: {} as Post,//fix
+    defaultValues: {} as Post, //fix
   });
 
   const topicTitle = topics.map((item: ITopicTitle) => ({
     label: item.title,
     value: item.id,
   }));
-  
+
   useEffect(() => {
-    if (!userData) {//fix type
-      console.log(userData)
+    if (!userData) {
+      //fix type
       navigate("/auth", { replace: true });
       errorToast(
         "Please, log in. Post creation is allowed only for authentificated users"
       );
     }
-  }, []);  
+  }, []);
 
   const submitPosts = async (value: Post) => {
     try {
@@ -80,19 +83,19 @@ const NewPost:FC = () => {//need fix?
     fetchTopics();
   }, []);
 
-  const handleSelectTopic = (theme: SelectorType | null) => {    
+  const handleSelectTopic = (theme: SelectorType | null) => {
     setTopicData(theme);
   };
 
   const resetSelections = () => {
     setTopicData(null);
     reset();
-  };  
+  };
 
   return (
     <NewPostStyled>
       <div className="post-area-global">
-        <NewPostHead />     
+        <NewPostHead />
         <div className="post-body">
           <form onSubmit={handleSubmit(submitPosts)}>
             <div className="post-input__wrapper">
@@ -118,15 +121,14 @@ const NewPost:FC = () => {//need fix?
                 className="post-save-button"
                 htmlType="submit"
               >
-                Save
+                {saveButton}
               </Button>
               <Button
-                // danger
                 className="post-save-button"
                 onClick={resetSelections}
                 type="primary"
               >
-                Clear
+                {clearButton}
               </Button>
             </div>
           </form>
