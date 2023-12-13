@@ -11,8 +11,9 @@ import PrivateRoute from "./utils/router/PrivateRouter";
 import { useAppDispatch } from "./hook";
 import { ConfigProvider, Space, Switch } from "antd";
 import { ThemeProvider } from "styled-components";
-import { GlobalStyle } from "./globalStyle";
+import { GlobalStyle } from "./global.styled";
 import { theme } from "./theme";
+import { getItemFromLocalStorage, setItemToLocalStorage } from "./utils/localStorage/localStorage";
 
 declare module "styled-components" {};
 
@@ -21,8 +22,8 @@ const App: FC = () => {
   const navigate = useNavigate();
 
   const [currentTheme, setCurrentTheme] = useState(() => {
-    const storedTheme = localStorage.getItem("mode");
-    const mode = storedTheme ? JSON.parse(storedTheme) : theme.white;
+    const storedTheme = getItemFromLocalStorage('mode');
+    const mode = storedTheme || theme.white;
     return mode;
   });
 
@@ -32,7 +33,7 @@ const App: FC = () => {
         ? theme.black
         : theme.white;
     setCurrentTheme(newTheme);
-    localStorage.setItem("mode", JSON.stringify(newTheme));
+    setItemToLocalStorage("mode", newTheme);
     return newTheme;
   };
   useEffect(() => {//fix
@@ -54,8 +55,7 @@ const App: FC = () => {
           <Space direction="vertical">
             <Switch
               checkedChildren="dark"
-              unCheckedChildren="light"
-              // defaultChecked
+              unCheckedChildren="light"             
               onClick={switchTheme}
             />
           </Space>         

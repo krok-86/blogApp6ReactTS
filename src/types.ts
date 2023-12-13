@@ -45,3 +45,10 @@ export type SelectorType = {
   label: string;
   value: string;
 };
+export type UrlsType = {
+  AUTH: string;
+  REG: string;
+  MAIN_PAGE:string;
+  CREATE_POST: string;
+  POST_EDIT: string;
+}

@@ -1,4 +1,4 @@
-import PostItemStyled from "./PostItemStyled";
+import PostItemStyled from "./PostItem.styled";
 import { format } from "date-fns";
 import { enGB } from "date-fns/esm/locale";
 import { Link } from "react-router-dom";
@@ -6,6 +6,7 @@ import { FC } from "react";
 import { IRegistrationForm, Post } from "../../types";
 import { Button } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { URLS } from "../../constants";
 
 interface IPostItem {
   post: Post;
@@ -38,7 +39,7 @@ const PostItem: FC<IPostItem> = ({ post, handleClick }) => {
           <div>Author {post?.user?.name}</div>
           <>
             <DeleteOutlined onClick={handleClick} className="post-icon" />
-            <Link to={`/postEdit/${post.id}`}>
+            <Link to={`${URLS.POST_EDIT}${post.id}`}>
               <EditOutlined className="post-icon" />
             </Link>
           </>

@@ -6,6 +6,7 @@ import { LeftOutlined } from "@ant-design/icons";
 import { Badge } from "antd";
 
 import { Link } from "react-router-dom";
+import { URLS } from "../../../constants";
 
 type PostEdit = {
     postData?: Post,
@@ -17,7 +18,7 @@ const postEditHead:FC<PostEdit> = ({postData, date,}) => {//need fix?
         <PostEditHeadStyled>               
         <div className="post-head">
           <div className="post-wrap">
-            <Link to="/" className="post-arrow-back">
+            <Link to={URLS.MAIN_PAGE} className="post-arrow-back">
               <LeftOutlined />
             </Link>
           </div>

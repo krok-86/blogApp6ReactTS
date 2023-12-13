@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { Post } from "../../types";
 
-import PostEditStyled from "./PostEditStyled";
+import PostEditStyled from "./PostEdit.styled";
 import { Button, Form } from "antd";
 import TextArea from "antd/es/input/TextArea";
 
@@ -18,7 +18,7 @@ import { getPostById } from "../../api/postApi";
 
 import { sendUpdatedPost } from "../../redux/slices/posts";
 
-import { saveButton } from "../../constants";
+import { SAVE_BUTTON, URLS } from "../../constants";
 
 import PostEditHead from "./PostEditHead/PostEditHead";
 
@@ -65,7 +65,7 @@ const PostEdit: FC = () => {
         sendUpdatedPost({ id, postText: postData?.post || "" })
       ).unwrap();
       successToast("The post has been edited");
-      navigate("/");
+      navigate(`${URLS.MAIN_PAGE}`);
     } catch (err: any) {
       errorToast(err.data);
     }
@@ -94,7 +94,7 @@ const PostEdit: FC = () => {
                 onClick={sendPost}
                 htmlType="submit"
               >
-                {saveButton}
+                {SAVE_BUTTON}
               </Button>
             </Form.Item>
           </div>

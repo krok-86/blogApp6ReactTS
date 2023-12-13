@@ -1,4 +1,16 @@
-import NewUserStyled from "./NewUserStyled";
+import { FC } from "react";
+import { IRegistrationForm } from "../../types";
+
+import {
+  CLEAR_BUTTON,
+  GO_BACK_BUTTON,
+  GO_LOG_IN,
+  GO_SIGN_UP,
+  SUBMIT_BUTTON,
+  URLS,
+} from "../../constants";
+
+import NewUserStyled from "./NewUser.styled";
 
 import { Button, Form, Input } from "antd";
 import { LeftOutlined } from "@ant-design/icons";
@@ -11,17 +23,7 @@ import { useAppDispatch } from "../../hook";
 import { successToast, errorToast } from "../../utils/toasts/toasts";
 
 import { fetchAuth, fetchReg } from "../../redux/slices/auth";
-
-import { FC } from "react";
-import { IRegistrationForm } from "../../types";
-
-import {
-  clearButton,
-  goBackButton,
-  goLogIn,
-  goSignUp,
-  submitButton,
-} from "../../constants";
+import { setItemToLocalStorage } from "../../utils/localStorage/localStorage";
 
 interface INewUser {
   isRegistration: boolean;
@@ -44,22 +46,22 @@ const NewUser: FC<INewUser> = ({ isRegistration }) => {
       if (isRegistration) {
         const data = await dispatch(fetchReg(value)).unwrap();
         if (data.token) {
-          window.localStorage.setItem("token", data.token); // add utils
+          setItemToLocalStorage("token", data.token); // add utils
         }
         successToast("User is created");
-        navigate("/");
+        navigate(`${URLS.MAIN_PAGE}`);
       } else {
         const data = await dispatch(fetchAuth(value)).unwrap();
         if ("token" in data && data.token) {
-          //fix?         
-          window.localStorage.setItem("token", data.token);
+          //fix?
+          setItemToLocalStorage("token", data.token);
           successToast("User is authorized");
-          navigate("/");
+          navigate(`${URLS.MAIN_PAGE}`);
         } else {
           errorToast(data?.payload?.data || "");
         }
       }
-      navigate("/");
+      navigate(`${URLS.MAIN_PAGE}`);
     } catch (err: any) {
       errorToast(err.data);
     }
@@ -109,31 +111,31 @@ const NewUser: FC<INewUser> = ({ isRegistration }) => {
           <div className="button-wrap">
             <Form.Item>
               <Button className="user-button" type="primary" htmlType="submit">
-                {submitButton}
+                {SUBMIT_BUTTON}
               </Button>
             </Form.Item>
             <Form.Item>
               <Button className="user-button" type="primary" htmlType="reset">
-                {clearButton}
+                {CLEAR_BUTTON}
               </Button>
             </Form.Item>
           </div>
         </Form>
       </div>
       {isRegistration ? (
-        <Link to="/auth" className="form-go-back">
+        <Link to={URLS.AUTH} className="form-go-back">
           <LeftOutlined />
-          {goLogIn}
+          {GO_LOG_IN}
         </Link>
       ) : (
-        <Link to="/registration" className="form-go-back">
+        <Link to={URLS.REG} className="form-go-back">
           <LeftOutlined />
-          {goSignUp}
+          {GO_SIGN_UP}
         </Link>
       )}
-      <Link to="/" className="form-go-back form-go-back__grey">
+      <Link to={URLS.MAIN_PAGE} className="form-go-back form-go-back__grey">
         <LeftOutlined />
-        {goBackButton}
+        {GO_BACK_BUTTON}
       </Link>
     </NewUserStyled>
   );

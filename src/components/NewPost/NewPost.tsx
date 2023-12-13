@@ -1,4 +1,4 @@
-import NewPostStyled from "./NewPostStyled";
+import NewPostStyled from "./NewPost.styled";
 
 import { Button } from "antd";
 
@@ -15,9 +15,10 @@ import { getTopics } from "../../api/postApi";
 import { addPost } from "../../redux/slices/posts";
 import NewPostHead from "./NewPostHead/NewPostHead";
 
-import { Post, SelectorType } from "../../types";
+import { Post, SelectorType, UrlsType } from "../../types";
+import { CLEAR_BUTTON, SAVE_BUTTON, URLS } from "../../constants";
 
-import { clearButton, saveButton } from "../../constants";
+
 
 type TopicDataType = SelectorType | null;
 
@@ -25,8 +26,7 @@ interface ITopicTitle {
   [label: string]: string;
   [value: number]: string;
 }
-const NewPost: FC = () => {
-  //need fix?
+const NewPost: FC = () => { 
   const userData = useAppSelector((state) => state.auth.data);
   const dispatch = useAppDispatch();
 
@@ -47,7 +47,7 @@ const NewPost: FC = () => {
   useEffect(() => {
     if (!userData) {
       //fix type
-      navigate("/auth", { replace: true });
+      navigate(`${URLS.AUTH}`, { replace: true });
       errorToast(
         "Please, log in. Post creation is allowed only for authentificated users"
       );
@@ -63,7 +63,7 @@ const NewPost: FC = () => {
       }; // type or not
       dispatch(addPost(body)).unwrap();
       successToast("Post is created");
-      navigate("/");
+      navigate(`${URLS.MAIN_PAGE}`);
     } catch (err: any) {
       console.log("submitPosts", err);
       errorToast(err.data);
@@ -121,14 +121,14 @@ const NewPost: FC = () => {
                 className="post-save-button"
                 htmlType="submit"
               >
-                {saveButton}
+                {SAVE_BUTTON}
               </Button>
               <Button
                 className="post-save-button"
                 onClick={resetSelections}
                 type="primary"
               >
-                {clearButton}
+                {CLEAR_BUTTON}
               </Button>
             </div>
           </form>
