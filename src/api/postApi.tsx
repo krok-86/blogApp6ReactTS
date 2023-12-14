@@ -1,6 +1,6 @@
 import axiosInstance from ".";
 
-import { IEditPost, IRegistrationForm, IRegistrationFormData, Post } from "../types";
+import { IEditPost, IRegistrationForm, IRegistrationFormData, Post, TopicType } from "../types";
 
 const postUrl = '/posts';
 const topicUrl = '/topics';
@@ -11,7 +11,7 @@ const userAuthMeUrl = '/users/authorization/me';
 //post block
 
 export const getPostById = async (id: string) => {
-    return await axiosInstance.get(`${postUrl}/${id}`)//type
+    return await axiosInstance.get<Post>(`${postUrl}/${id}`)//type
 }
 
 export const putPostById = (params: IEditPost) => {
@@ -47,5 +47,5 @@ export const getUserAuthMe = () => {
 // topic block
 
 export const getTopics = () => {
-    return axiosInstance.get(topicUrl);
+    return axiosInstance.get<TopicType[]>(topicUrl);
 }

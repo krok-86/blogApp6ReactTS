@@ -22,7 +22,7 @@
   },
   "include": [
     "src",
-    "styled",//fix?
+    "styled",
     "types",
   ]
 }

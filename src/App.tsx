@@ -26,23 +26,20 @@ const App: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const [currentTheme, setCurrentTheme] = useState(() => {
-    const storedTheme = LocalStorageUtil.getItem("mode");
-    const mode = storedTheme || theme.white;
+  const [currentTheme, setCurrentTheme] = useState(() => {    
+    const isWhiteTheme = LocalStorageUtil.getItem("isWhiteTheme");
+    const mode = isWhiteTheme ? theme.white : theme.black;
     return mode;
   });
 
-  const switchTheme = () => {
-    const newTheme =
-      currentTheme.colorPrimary === theme.white.colorPrimary
-        ? theme.black
-        : theme.white;
-    setCurrentTheme(newTheme);
-    LocalStorageUtil.setItem("mode", newTheme);
+  const switchTheme = () => {    
+    const isWhite = currentTheme.colorPrimary === theme.white.colorPrimary;
+    const newTheme = isWhite ? theme.black : theme.white;
+    setCurrentTheme(newTheme);    
+    LocalStorageUtil.setItem("isWhiteTheme", isWhite);
     return newTheme;
   };
-  useEffect(() => {
-    //fix
+  useEffect(() => {    
     dispatch(fetchAuthMe());
     navigate(JSON.parse(window.sessionStorage.getItem("lastRoute") || "{}"));
     window.onbeforeunload = () => {

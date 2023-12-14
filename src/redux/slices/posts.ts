@@ -30,8 +30,7 @@ export const fetchRemovePost = createAsyncThunk<
 >("posts/fetchRemovePost", async (id, { rejectWithValue }) => {
   try {
     return await deletePostById(id);
-  } catch (err: any) {
-    //fix
+  } catch (err: any) {    
     return rejectWithValue({ data: err.response.data.message });
   }
 });
@@ -91,7 +90,7 @@ const postsSlice = createSlice({
     });
     //add post
     builder.addCase(addPost.fulfilled, (state, action) => {
-      state.posts = [...state.posts, action.payload.data];
+      state.posts = [action.payload.data, ...state.posts];
       console.log(state.posts);
     });
     //update post

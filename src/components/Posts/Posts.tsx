@@ -16,7 +16,7 @@ import { LocalStorageUtil } from "../../utils/localStorage/localStorage";
 const Posts: FC = () => {
   const { posts } = useAppSelector((state) => state.posts);
   const userData = useAppSelector((state) => state.auth.data);
-  const isAuth = useAppSelector((state) => state.auth.data); //fix
+  const isAuth = useAppSelector((state) => state.auth.data); 
   const dispatch = useAppDispatch();
 
   useEffect(() => {

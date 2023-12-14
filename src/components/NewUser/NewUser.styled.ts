@@ -31,7 +31,7 @@ const NewUserStyled = styled.div`
     margin: 15px 50px;
     color: ${(props) => props.theme.colorPrimary};
   }
-  .ant-form-item-required {//fix
+  .ant-form-item-required {
     ::text {
       color: red;      
     }

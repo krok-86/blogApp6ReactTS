@@ -15,38 +15,31 @@ import { getTopics } from "../../api/postApi";
 import { addPost } from "../../redux/slices/posts";
 import NewPostHead from "./NewPostHead/NewPostHead";
 
-import { Post, SelectorType, UrlsType } from "../../types";
+import { Post, SelectorType, TopicType } from "../../types";
 import { CLEAR_BUTTON, SAVE_BUTTON, URLS } from "../../constants";
-
-
 
 type TopicDataType = SelectorType | null;
 
-interface ITopicTitle {
-  [label: string]: string;
-  [value: number]: string;
-}
 const NewPost: FC = () => { 
   const userData = useAppSelector((state) => state.auth.data);
   const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
 
-  const [topics, setTopics] = useState([]);//fix why topis has type never?
+  const [topics, setTopics] = useState<TopicType[]>([]);
   const [topicData, setTopicData] = useState<TopicDataType>(null);
 
   const { register, handleSubmit, reset } = useForm({
-    defaultValues: {} as Post, //fix why as Post?
+    defaultValues: {} as Post, 
   });
 
-  const topicTitle = topics.map((item: ITopicTitle) => ({
-    label: item.title,
-    value: item.id,
+  const topicTitle: SelectorType[] = topics.map((item: TopicType) => ({
+    label: item.title,    
+    value: (item.id).toString(),
   }));
 
   useEffect(() => {
     if (!userData) {
-      //fix type
       navigate(`${URLS.AUTH}`, { replace: true });
       errorToast(
         "Please, log in. Post creation is allowed only for authentificated users"
@@ -60,7 +53,7 @@ const NewPost: FC = () => {
         ...value,
         userId: userData?.id,
         topicId: topicData?.value,
-      }; // type or not
+      }; 
       dispatch(addPost(body)).unwrap();
       successToast("Post is created");
       navigate(`${URLS.MAIN_PAGE}`);
@@ -73,8 +66,8 @@ const NewPost: FC = () => {
   useEffect(() => {
     const fetchTopics = async () => {
       try {
-        const result = await getTopics();//fix - result any?
-        setTopics(result.data);//fix - data any?, setTopic any?
+        const result = await getTopics();
+        setTopics(result.data);
       } catch (err: any) {
         errorToast(err.response.data.message);
         console.log("fetchTopics", err);

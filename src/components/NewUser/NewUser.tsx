@@ -52,7 +52,7 @@ const NewUser: FC<INewUser> = ({ isRegistration }) => {
         navigate(`${URLS.MAIN_PAGE}`);
       } else {
         const data = await dispatch(fetchAuth(value)).unwrap();
-        if ("token" in data && data.token) { //fix? we can del - "&& data.token" and nothing change
+        if (data.token?.length) {
           LocalStorageUtil.setItem("token", data.token);
           successToast("User is authorized");
           navigate(`${URLS.MAIN_PAGE}`);

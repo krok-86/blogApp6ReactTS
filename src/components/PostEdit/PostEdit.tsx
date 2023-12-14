@@ -39,7 +39,7 @@ const PostEdit: FC = () => {
       if (!id) return;
       try {
         const result = await getPostById(id);        
-        setPostData(result.data);//fix data any?
+        setPostData(result.data);
       } catch (err: any) {
         errorToast(err.response.data.message);
         console.log("getPostById", err);
@@ -50,7 +50,7 @@ const PostEdit: FC = () => {
 
   const updatePost = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     try {
-      const newPost = { ...postData, post: event.target?.value }; //fix post string? may be object?
+      const newPost = { ...postData, post: event.target?.value }; 
       setPostData(newPost);
     } catch (err) {
       console.log("updatePost", err);
@@ -61,7 +61,7 @@ const PostEdit: FC = () => {
     if (!id) return;
     try {
       await dispatch(
-        sendUpdatedPost({ id, postText: postData?.post || "" })//fix post string? may be object?
+        sendUpdatedPost({ id, postText: postData?.post || "" })
       ).unwrap();
       successToast("The post has been edited");
       navigate(`${URLS.MAIN_PAGE}`);
