@@ -11,7 +11,7 @@ export const theme = {
     backgroundColorPost: "#fcfffc",
     backgroundImg: "img/snow_texture155.jpg",
     borderPosts: "2px solid #eee3fb",
-    borderPost: "1px solid #cfacf5",   
+    borderPost: "1px solid #cfacf5",
   },
   black: {
     colorPrimary: "#33f3c1",
@@ -25,6 +25,6 @@ export const theme = {
     backgroundColorPost: "#1a1d1a",
     backgroundImg: "img/night.jpg",
     borderPosts: "2px solid #b478f9",
-    borderPost: "1px solid #b478f9",  
+    borderPost: "1px solid #b478f9",
   },
 };

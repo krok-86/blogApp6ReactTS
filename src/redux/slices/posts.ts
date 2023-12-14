@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+
 import { IEditPost, IRejectValue, Post, PostData } from "../../types";
+
 import {
   deletePostById,
   getPosts,

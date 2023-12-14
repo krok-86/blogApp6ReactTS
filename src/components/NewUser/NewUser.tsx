@@ -23,7 +23,7 @@ import { useAppDispatch } from "../../hook";
 import { successToast, errorToast } from "../../utils/toasts/toasts";
 
 import { fetchAuth, fetchReg } from "../../redux/slices/auth";
-import { setItemToLocalStorage } from "../../utils/localStorage/localStorage";
+import { LocalStorageUtil } from "../../utils/localStorage/localStorage";
 
 interface INewUser {
   isRegistration: boolean;
@@ -46,15 +46,14 @@ const NewUser: FC<INewUser> = ({ isRegistration }) => {
       if (isRegistration) {
         const data = await dispatch(fetchReg(value)).unwrap();
         if (data.token) {
-          setItemToLocalStorage("token", data.token); // add utils
+          LocalStorageUtil.setItem("token", data.token);
         }
         successToast("User is created");
         navigate(`${URLS.MAIN_PAGE}`);
       } else {
         const data = await dispatch(fetchAuth(value)).unwrap();
-        if ("token" in data && data.token) {
-          //fix?
-          setItemToLocalStorage("token", data.token);
+        if ("token" in data && data.token) { //fix? we can del - "&& data.token" and nothing change
+          LocalStorageUtil.setItem("token", data.token);
           successToast("User is authorized");
           navigate(`${URLS.MAIN_PAGE}`);
         } else {

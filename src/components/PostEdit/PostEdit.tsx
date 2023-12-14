@@ -23,7 +23,7 @@ import { SAVE_BUTTON, URLS } from "../../constants";
 import PostEditHead from "./PostEditHead/PostEditHead";
 
 const PostEdit: FC = () => {
-  //fix?
+  
   const userData = useAppSelector((state) => state.auth.data);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -38,9 +38,8 @@ const PostEdit: FC = () => {
     const fetchDataId = async () => {
       if (!id) return;
       try {
-        const result = await getPostById(id);
-        console.log(result.data);
-        setPostData(result.data);
+        const result = await getPostById(id);        
+        setPostData(result.data);//fix data any?
       } catch (err: any) {
         errorToast(err.response.data.message);
         console.log("getPostById", err);
@@ -51,7 +50,7 @@ const PostEdit: FC = () => {
 
   const updatePost = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     try {
-      const newPost = { ...postData, post: event.target?.value }; //type?
+      const newPost = { ...postData, post: event.target?.value }; //fix post string? may be object?
       setPostData(newPost);
     } catch (err) {
       console.log("updatePost", err);
@@ -62,7 +61,7 @@ const PostEdit: FC = () => {
     if (!id) return;
     try {
       await dispatch(
-        sendUpdatedPost({ id, postText: postData?.post || "" })
+        sendUpdatedPost({ id, postText: postData?.post || "" })//fix post string? may be object?
       ).unwrap();
       successToast("The post has been edited");
       navigate(`${URLS.MAIN_PAGE}`);

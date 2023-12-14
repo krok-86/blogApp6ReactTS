@@ -1,22 +1,25 @@
 
-export const getItemFromLocalStorage = (key: string) => {
-  const targetJSON = localStorage.getItem(key);
-  const target = targetJSON ? JSON.parse(targetJSON) : undefined;
-  return target;
-}
+// export const getItemFromLocalStorage = (key: string) => {
+//   const targetJSON = localStorage.getItem(key);
+//   const target = targetJSON ? JSON.parse(targetJSON) : undefined;
+//   return target;
+// }
 
-export const setItemToLocalStorage = (key: string, value: any) => {//fix? why value any?
-  const targetJSON = JSON.stringify(value);
-  localStorage.setItem(key, targetJSON);
-}
+// export const setItemToLocalStorage = (key: string, value: any) => {
+//   const targetJSON = JSON.stringify(value);
+//   localStorage.setItem(key, targetJSON);
+// }
 
 export class LocalStorageUtil {
   static getItem(key: string): string | null {
     return window.localStorage.getItem(key)
   }
 
-  static setItem(key: string, value: string): void {
+  static setItem(key: string, value: any): void {
     window.localStorage.setItem(key, value)
+  }
+   static removeItem(key: string): void {
+    window.localStorage.removeItem(key)
   }
 }
 // const localStorageUtil = {

@@ -45,10 +45,42 @@ export type SelectorType = {
   label: string;
   value: string;
 };
+
 export type UrlsType = {
   AUTH: string;
   REG: string;
   MAIN_PAGE:string;
   CREATE_POST: string;
   POST_EDIT: string;
+}
+
+export type ThemeType = {
+  white: {
+    colorPrimary?: string;
+    colorSecondary: string;
+    backgroundColor: string;
+    colorText: string;
+    colorTextPost: string;
+    colorTextInfo: string;
+    colorTextPlaceHolder: string;
+    backgroundColorPosts: string;
+    backgroundColorPost: string;
+    backgroundImg: string;
+    borderPosts: string;
+    borderPost: string;
+  },
+  black: {
+    colorPrimary?: string;
+    colorSecondary: string;
+    backgroundColor: string;
+    colorText: string;
+    colorTextPost: string;
+    colorTextInfo: string;
+    colorTextPlaceHolder: string;
+    backgroundColorPosts: string;
+    backgroundColorPost: string;
+    backgroundImg: string;
+    borderPosts: string;
+    borderPost: string;  
+  },
 }

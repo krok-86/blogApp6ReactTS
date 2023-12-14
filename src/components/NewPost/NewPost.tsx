@@ -32,11 +32,11 @@ const NewPost: FC = () => {
 
   const navigate = useNavigate();
 
-  const [topics, setTopics] = useState([]);
+  const [topics, setTopics] = useState([]);//fix why topis has type never?
   const [topicData, setTopicData] = useState<TopicDataType>(null);
 
   const { register, handleSubmit, reset } = useForm({
-    defaultValues: {} as Post, //fix
+    defaultValues: {} as Post, //fix why as Post?
   });
 
   const topicTitle = topics.map((item: ITopicTitle) => ({
@@ -73,8 +73,8 @@ const NewPost: FC = () => {
   useEffect(() => {
     const fetchTopics = async () => {
       try {
-        const result = await getTopics();
-        setTopics(result.data);
+        const result = await getTopics();//fix - result any?
+        setTopics(result.data);//fix - data any?, setTopic any?
       } catch (err: any) {
         errorToast(err.response.data.message);
         console.log("fetchTopics", err);

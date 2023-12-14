@@ -11,6 +11,7 @@ import { logout } from "../../redux/slices/auth";
 
 import PostsStyled from "./Posts.styled";
 import { Flex } from "antd";
+import { LocalStorageUtil } from "../../utils/localStorage/localStorage";
 
 const Posts: FC = () => {
   const { posts } = useAppSelector((state) => state.posts);
@@ -25,7 +26,7 @@ const Posts: FC = () => {
   const onClickLogOut = () => {
     if (window.confirm("Do you really want to go out?")) {
       dispatch(logout());
-      window.localStorage.removeItem("token"); //fix
+      LocalStorageUtil.removeItem("token");
     }
   };
 

@@ -2,27 +2,32 @@ import Posts from "./components/Posts/Posts";
 import PostEdit from "./components/PostEdit/PostEdit";
 import NewPost from "./components/NewPost/NewPost";
 import NewUser from "./components/NewUser/NewUser";
+
+import { FC, useEffect, useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
+import PrivateRoute from "./utils/router/PrivateRouter";
+
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 import { fetchAuthMe } from "./redux/slices/auth";
-import { FC, useEffect, useState } from "react";
-import PrivateRoute from "./utils/router/PrivateRouter";
+
+import { LocalStorageUtil } from "./utils/localStorage/localStorage";
 import { useAppDispatch } from "./hook";
+
 import { ConfigProvider, Space, Switch } from "antd";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "./global.styled";
 import { theme } from "./theme";
-import { getItemFromLocalStorage, setItemToLocalStorage } from "./utils/localStorage/localStorage";
 
-declare module "styled-components" {};
+declare module "styled-components" {}
 
 const App: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const [currentTheme, setCurrentTheme] = useState(() => {
-    const storedTheme = getItemFromLocalStorage('mode');
+    const storedTheme = LocalStorageUtil.getItem("mode");
     const mode = storedTheme || theme.white;
     return mode;
   });
@@ -33,10 +38,11 @@ const App: FC = () => {
         ? theme.black
         : theme.white;
     setCurrentTheme(newTheme);
-    setItemToLocalStorage("mode", newTheme);
+    LocalStorageUtil.setItem("mode", newTheme);
     return newTheme;
   };
-  useEffect(() => {//fix
+  useEffect(() => {
+    //fix
     dispatch(fetchAuthMe());
     navigate(JSON.parse(window.sessionStorage.getItem("lastRoute") || "{}"));
     window.onbeforeunload = () => {
@@ -48,17 +54,17 @@ const App: FC = () => {
   }, []);
 
   return (
-    <>    
+    <>
       <ThemeProvider theme={currentTheme}>
         <ConfigProvider theme={{ token: currentTheme }}>
           <GlobalStyle />
           <Space direction="vertical">
             <Switch
               checkedChildren="dark"
-              unCheckedChildren="light"             
+              unCheckedChildren="light"
               onClick={switchTheme}
             />
-          </Space>         
+          </Space>
           <Routes>
             <Route path="/" element={<Posts />} />
             <Route element={<PrivateRoute />}>
@@ -70,7 +76,7 @@ const App: FC = () => {
               element={<NewUser isRegistration={true} />}
             />
             <Route path="/auth" element={<NewUser isRegistration={false} />} />
-          </Routes>          
+          </Routes>
           <ToastContainer
             position="top-right"
             autoClose={5000}
@@ -82,10 +88,10 @@ const App: FC = () => {
             draggable
             pauseOnHover
             theme="light"
-          />          
+          />
         </ConfigProvider>
-      </ThemeProvider>             
-      </>
+      </ThemeProvider>
+    </>
   );
 };
 

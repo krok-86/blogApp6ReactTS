@@ -1,7 +1,6 @@
 import axiosInstance from ".";
+
 import { IEditPost, IRegistrationForm, IRegistrationFormData, Post } from "../types";
-
-
 
 const postUrl = '/posts';
 const topicUrl = '/topics';
@@ -32,10 +31,6 @@ export const postPosts = (body: Post) => {
 }
 
 //user block
-
-// export const getUsers = () => {
-//     return axiosInstance.get(userUrl);
-// }
 
 export const postUserReg = (body: IRegistrationForm) => {
     return axiosInstance.post<IRegistrationFormData>(userRegUrl,body);
